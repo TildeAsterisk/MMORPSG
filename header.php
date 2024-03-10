@@ -34,10 +34,10 @@ include_once("connection.php");
           <div id="miniProfile">
             <a href="profile.php" class="tooltip">
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
-            <center>
-            <?php echo $food_symbol."<b>".$stats['food']."</b>"; ?>   
-            <?php echo $materials_symbol."<b>".$stats['materials']."</b>"; ?>   
-            <?php echo $currency_symbol."<b>".$stats['currency']."</b>"; ?><br>
+            <center>   
+            <?php echo $currency_symbol."<b>".$stats['currency']."</b>"; ?>
+            <?php echo $food_symbol."<b>".$stats['energy']."</b>"; ?>   
+            <?php echo $materials_symbol."<b>".$stats['experience']."</b>"; ?><br>
             </center>
             <span class="tooltiptext"><?php echo $food_symbol?>=Food,<?php echo $materials_symbol?>=Materials,<?php echo $currency_symbol?>=Currency</span>
             </a>

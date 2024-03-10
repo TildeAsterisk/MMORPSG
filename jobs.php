@@ -19,11 +19,13 @@ if(!isset($_SESSION['uid'])){
         <tr class="TemplateJob">
             <td>This is a job.</td>
             <td>
-                100<?php echo $stats['currency'].$currency_symbol ?><br>
-                Item
+                +10<?php echo $stats['currency'].$currency_symbol ?><br>
+                +100<?php echo $materials_symbol ?><br>
+                +1 Common Item
             </td>
             <td>
                 Level 1<br>
+                Energy: 1<?php echo $food_symbol?><br>
                 Ammo: 50
             </td>
             <td>
