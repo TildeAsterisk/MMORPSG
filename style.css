@@ -3,10 +3,12 @@ background-color: #C4C4C4;
 font-family: monospace;
 }
 
-#con_div {
-padding: 10px;
+/* This div has all the html in the body */
+#container {
+
 }
 
+/* Contains everything after Header */
 #content {
 float: left;
 padding:10px;   
@@ -99,3 +101,9 @@ width: 25%;
     background-color: #0000000f;
     padding:5px;
 }
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding:5px;
+  }

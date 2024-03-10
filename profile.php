@@ -9,7 +9,7 @@ if(!isset($_SESSION['uid'])){
 else{
   ?>
   <!--pre-->
-  <center><h2 style="margin:0;padding:0;"><i><?php echo ucfirst($user['username'])."</i> - ".$leaderboard['overall'].$overall_symbol ?></h2></center><hr>
+  <center><h2 style="margin:0;padding:0;"><i><?php echo ucfirst($user['username'])."</i> - ???"./*$leaderboard['overall'].*/$overall_symbol ?></h2></center><hr>
   <table cellpadding="3" cellspacing="5">
     <!--tr>
       <td>Username:</td>
@@ -19,25 +19,25 @@ else{
       <td></td>
       <td>Points:</td>
       <td><?php  echo $stats['points'] ?></td>
-    </tr-->
+    </tr
     <tr>
       <td>Materials:</td>
       <td><?php  echo $stats['materials'].$materials_symbol ?></td>
       <td><?php  echo '+'.$stats['mat_production'].$materials_symbol.'/ut' ?></td>
       <td><div class="tooltip">?<span class="tooltiptext">Materials<?php echo $materials_symbol;?>, Gained from (lumberjacks/miners? coming soon).</span></div></td>
-    </tr>
+    </tr-->
     <tr>
     <td>Currency:</td>
       <td><?php  echo $stats['currency'].$currency_symbol ?></td>
       <td><?php  echo '+'.$stats['income'].$currency_symbol.'/ut' ?></td>
       <td><div class="tooltip">?<span class="tooltiptext">Currency<?php echo $currency_symbol;?>, Gained from workers.</span></div></td>
     </tr>
-    <tr>
+    <!--tr>
       <td>Food:</td>
       <td><?php  echo $stats['food'].$food_symbol ?></td>
       <td><?php  echo '+'.$stats['farming'].$food_symbol.'/ut' ?></td>
       <td><div class="tooltip">?<span class="tooltiptext">Food<?php echo $food_symbol;?>, Gained from farmers.</span></div></td>
-    </tr>
+    </tr-->
     <tr>
       <td>Attack:</td>
       <td><?php  echo $stats['attack'].$attack_symbol ?></td>
@@ -50,20 +50,7 @@ else{
       <td></td>
       <td><div class="tooltip">?<span class="tooltiptext">Defense<?php echo $defense_symbol;?>, Gained from defenders.</span></div></td>
     </tr>
-    <td></td>
-    <td></td>
-    <tr>
-      <td>Farmers:</td>
-      <td>Workers:</td>
-      <td>Warriors:</td>
-      <td>Defenders:</td>
-    </tr>
-    <tr style="text-align: center;">
-      <td><?php  echo $unit['farmer'] ?></td>
-      <td><?php  echo $unit['worker'] ?></td>
-      <td><?php  echo $unit['warrior'] ?></td>
-      <td><?php  echo $unit['defender'] ?></td>
-    </tr>
+    
   </table>
 <!--/pre-->
   <?php

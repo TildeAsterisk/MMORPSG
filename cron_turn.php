@@ -17,6 +17,7 @@ while($user = mysqli_fetch_assoc($get_users)){
 mysqli_query($mysql,"DELETE FROM `logs` WHERE `time`<'".(time()-86400)."'") or die(mysqli_error($mysql));
 
 //include("cron_rankings.php");
+
 // Rankings update every period time
 //Update Rankings, global leaderboard
 $get_attack = mysqli_query($mysql,"SELECT `id`,`attack` FROM `stats` ORDER BY `attack` DESC") or die(mysqli_error($mysql));

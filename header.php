@@ -28,6 +28,9 @@ include_once("connection.php");
           //echo "Logged in.";
           //echo $stats['points'];
         ?>
+
+          <h1 style="position:absolute;padding:0;margin:0;">~* MMO RPG</h1>
+
           <div id="miniProfile">
             <a href="profile.php" class="tooltip">
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
