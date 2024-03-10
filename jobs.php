@@ -25,7 +25,7 @@ if(!isset($_SESSION['uid'])){
             </td>
             <td>
                 Level 1<br>
-                Energy: 1<?php echo $food_symbol?><br>
+                Energy: 1<?php echo $energy_symbol?><br>
                 Ammo: 50
             </td>
             <td>

@@ -27,6 +27,12 @@ else{
       <td><div class="tooltip">?<span class="tooltiptext">Materials<?php echo $materials_symbol;?>, Gained from (lumberjacks/miners? coming soon).</span></div></td>
     </tr-->
     <tr>
+    <td>Experience:</td>
+      <td><?php  echo $stats['experience']."xp" ?></td>
+      <td></td>
+      <td><div class="tooltip">?<span class="tooltiptext">Experience<?php echo $currency_symbol;?>, Gained from Jobs.</span></div></td>
+    </tr>
+    <tr>
     <td>Currency:</td>
       <td><?php  echo $stats['currency'].$currency_symbol ?></td>
       <td><?php  echo '+'.$stats['income'].$currency_symbol.'/ut' ?></td>

@@ -36,8 +36,8 @@ include_once("connection.php");
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
             <center>   
             <?php echo $currency_symbol."<b>".$stats['currency']."</b>"; ?>
-            <?php echo $food_symbol."<b>".$stats['energy']."</b>"; ?>   
-            <?php echo $materials_symbol."<b>".$stats['experience']."</b>"; ?><br>
+            <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?>   
+            <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?><br>
             </center>
             <span class="tooltiptext"><?php echo $food_symbol?>=Food,<?php echo $materials_symbol?>=Materials,<?php echo $currency_symbol?>=Currency</span>
             </a>
