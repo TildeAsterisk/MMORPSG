@@ -1,0 +1,143 @@
+body {
+background-color: #C4C4C4;
+font-family: monospace;
+}
+
+/* UNUSED CSS
+body a {
+color: #000000;
+}
+
+
+#header {
+background-color: #898989;
+width: 800px;
+color: #FFFFFF;
+font-size: 18pt;
+border: 1px solid #000000;
+}
+
+#output {
+margin-left: 25%;
+margin-right: 25%;
+padding: 10px;
+border: 1px solid #898989;
+font-weight: bold;
+color: red;
+text-align: center;
+}*/
+
+#container {
+background-color: #c3c3c379;
+overflow: hidden;
+/*width:100%;*/
+width: fit-content; 
+border: 1px solid #000000;
+}
+
+#navigation {
+/*width: 15%;*/
+float: left;
+}
+
+#navigation a {
+color: #000000;
+text-decoration: none;
+}
+
+#nav_div {
+padding: 10px;
+}
+
+#con_div {
+padding: 10px;
+}
+
+#content {
+float: left;
+padding:10px;   
+}
+
+#footer {
+background-color: #898989;
+width: 800px;
+color: #FFFFFF;
+font-size: 12pt;
+border: 1px solid #000000;
+}
+
+html body div a img {
+display:none;
+}
+
+/* Tooltip container */
+.tooltip {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+.tooltip-nodec {
+position: relative;
+display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext,.tooltip-nodec .tooltiptext {
+visibility: hidden;
+background-color: #555;
+color: #fff;
+text-align: center;
+padding: 3px 3px;
+border-radius: 6px;
+
+/* Position the tooltip text */
+position: absolute;
+z-index: 1;
+/*Top
+bottom: 125%; 
+left: 50%;*/
+top: -5px; /*Right*/
+left: 125%;
+
+margin-left: -60px;
+
+/* Fade in tooltip */
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+/*
+.tooltip .tooltiptext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: #555 transparent transparent transparent;
+}
+*/
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext,.tooltip-nodec:hover .tooltiptext {
+visibility: visible;
+opacity: 1;
+}
+
+/*
+input[type="text"] {
+width: 25%;
+}
+*/
+
+#myCanvas {
+position: absolute;
+z-index: -1;
+left:0;
+top:0;  
+}
+
+
+
