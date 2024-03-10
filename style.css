@@ -27,16 +27,16 @@ color: red;
 text-align: center;
 }*/
 
+/*
 #container {
 background-color: #c3c3c379;
 overflow: hidden;
-/*width:100%;*/
 width: fit-content; 
 border: 1px solid #000000;
 }
 
+
 #navigation {
-/*width: 15%;*/
 float: left;
 }
 
@@ -48,6 +48,7 @@ text-decoration: none;
 #nav_div {
 padding: 10px;
 }
+*/
 
 #con_div {
 padding: 10px;
@@ -141,3 +142,16 @@ top:0;
 
 
 
+#navbar {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#miniProfile {
+    float: right;
+    /*border: 1px dotted black;*/
+    background-color: #0000000f;
+    padding:5px;
+}

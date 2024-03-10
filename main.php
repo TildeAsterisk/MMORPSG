@@ -11,14 +11,10 @@ else{
   //Player is logged in, show main page
   ?>
 
-  <!-- Main page HTML stuff-->
-  <div id="controlpanel">
-      <div id="GameTxtMsg1">Select Mode</div>
-    </div>
-
-    <canvas id="myCanvas"></canvas>
-
-    <script type="text/javascript" src="CanvasGame.js"></script>
+<!--center><h1>Legend</h1></center-->
+Messages:<br>
+ - Player Updates:<br>
+ - Inbox:
 
   <?php
 }

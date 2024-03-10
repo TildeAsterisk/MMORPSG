@@ -8,7 +8,7 @@
 <div style="position: fixed; bottom: 0px; left: 10px; font-size: 12px;">
   <br><br><br><br>
   <a target="_blank" href="https://tildeasterisk.blogspot.com/p/home.html">Blog</a> - 
-  <a target="_blank" href="https://tildeasterisk.blogspot.com/p/home.html">Other Games</a>
+  <a target="_blank" href="https://zion.run">Resume</a>
   <br><br>
 </div>
 

@@ -5,10 +5,12 @@ if(!isset($_SESSION['uid'])){
     echo "You must be logged in to view this page!";
 }else{
     ?>
-    <center><h2>Market</h2></center>
+    <center><h2>Inventory</h2></center>
     <br />
+    
     <?php
     //include("leaderboard.php");
 }
 include("footer.php");
+
 ?>
