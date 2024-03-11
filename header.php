@@ -30,21 +30,21 @@ include_once("connection.php");
         ?>
 
           <h1 style="position:absolute;padding:0;margin:0;">~* MMO RPG</h1>
-          <br><br><br>
+          
+          <a href="profile.php">
           <div id="miniProfile">
-            
-            <span>Currency:<br>    <?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?></span>
-            <span>Energy:<br>      <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?></span>   
-            <span>Experience:<br> <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?></span><br>
-            <a href="profile.php">
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
+            <?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?>
+            <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?>
+            <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?><br>
+            
             <div style="background-color:grey;margin-top:5px;">
               <div style="background-color:lightgreen;height:12px;width:20%"></div>
             </div>
-            </a>
 
           </div>
-          <hr>
+          </a>
+          <br><br><br><br><hr>
           <div id="navbar">
             <a href="main.php">Home</a>
             <!--a href="profile.php">Profile</a-->
