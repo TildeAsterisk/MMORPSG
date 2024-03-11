@@ -34,6 +34,7 @@ if(isset($_POST['register'])){
       $ins2=mysqli_query($mysql,"INSERT INTO `units` (`worker`,`farmer`,`warrior`,`defender`) VALUES (5,5,0,0)") or die(mysqli_error($mysql));
       $ins3=mysqli_query($mysql,"INSERT INTO `user`  (`username`,`password`,`email`) VALUES ('$username','".md5($password)."','$email')") or die(mysqli_error($mysql));
       $ins4=mysqli_query($mysql,"INSERT INTO `ranking` (`attack`,`defense`,`overall`) VALUES(0,0,0)") or die(mysqli_error($mysql));
+      $ins5=mysqli_query($mysql,"INSERT INTO `inventory` (`items`) VALUES ('[{}]')") or die(mysqli_error($mysql));
       echo "Thank you for registering with Tilde Asterisk ~*";
       
       UpdateGlobalRankingStats($mysql);

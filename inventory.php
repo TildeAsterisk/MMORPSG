@@ -9,7 +9,18 @@ if(!isset($_SESSION['uid'])){
     <br />
     
     <?php
-    //include("leaderboard.php");
+
+    $get_inventory = mysqli_query($mysql,"SELECT `items` FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    $inv_items = mysqli_fetch_assoc($get_inventory);
+    //echo implode($inv_items);
+    $decoded_items=json_decode(implode($inv_items),true);
+    foreach ($decoded_items as $item) {
+        foreach($item as $property => $value){
+            echo ucfirst($property).": $value<br>";
+        }
+        echo "<br>";
+    }
+    
 }
 include("footer.php");
 

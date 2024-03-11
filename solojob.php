@@ -8,7 +8,7 @@ if(!isset($_SESSION['uid'])){
   //Generate enemy stats based on job
   $enemy_stats = [  // Associative Array / Dictionary
     'attack' => 10,
-    'defense' => 10,
+    'defense' => 0,
     'currency' => 20
   ];
   $turns=1;//energy modifier?
