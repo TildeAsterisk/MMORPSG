@@ -29,7 +29,7 @@ include_once("connection.php");
           //echo $stats['points'];
         ?>
 
-          <h1 style="position:absolute;padding:0;margin:0;">~* MMO RPG</h1>
+          <h1 style="position:absolute;padding:0;margin:15px;">~* MMO RPG</h1>
           
           <a href="profile.php">
           <div id="miniProfile">
