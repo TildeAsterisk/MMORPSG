@@ -67,11 +67,11 @@ include_once("connection.php");
           <hr>
           <div id="navbar">
             <!--a href="main.php">Home</a-->
-            <!--a href="profile.php">Profile</a-->
-            <a href="inventory.php">Inventory</a>
+            <a href="profile.php">Profile</a>
             <a href="jobs.php">Jobs</a>
-            <a href="rankings.php">Fight</a>
+            <a href="inventory.php">Inventory</a>
             <a href="shop.php">Market</a>
+            <a href="rankings.php">Ranking</a>
             <a href="logout.php">Log-Out</a>
           </div>
           <hr>

@@ -18,7 +18,7 @@ if(!isset($_SESSION['uid'])){
         foreach($item as $property => $value){
             echo ucfirst($property).": $value<br>";
         }
-        echo "<br>";
+        echo "<br >";
     }
     
 }
