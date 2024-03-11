@@ -6,7 +6,7 @@ $currency_symbol="&#164;";
 $attack_symbol= "&#9876;" ;//"&#128481;";
 $defense_symbol="<b>&#128737;</b>";
 $overall_symbol="&#9055;";
-$energy_symbol="⚡";
+$energy_symbol="⚡";//"⚡";
 $experience_symbol="xp";
 $level_symbol="📶";
 
@@ -69,4 +69,5 @@ function UpdateGlobalRankingStats($mysql){
     }
 }
 
-?>
+
+

@@ -8,7 +8,7 @@ if(!isset($_SESSION['uid'])){
     <center><h2>Jobs</h2></center>
     <br />
 
-    <table id="jobsTable">
+    <table id="jobsTable" style="width:100%;">
         <tr>
             <td>Description:</td>
             <td>Reward:</td>
