@@ -113,3 +113,9 @@ width: 25%;
     
     padding:5px;
   }
+
+  
+#headerProfile table, #headerProfile td, #headerProfile th{
+    vertical-align: text-top
+  }
+  

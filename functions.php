@@ -8,6 +8,7 @@ $defense_symbol="<b>&#128737;</b>";
 $overall_symbol="&#9055;";
 $energy_symbol="⚡";
 $experience_symbol="xp";
+$level_symbol="📶";
 
 function protect ($mysqlc,$string){
     return mysqli_real_escape_string($mysqlc,strip_tags(addslashes($string)));

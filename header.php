@@ -29,10 +29,9 @@ include_once("connection.php");
           //echo $stats['points'];
         ?>
 
-          <h1 style="position:absolute;padding:0;margin:15px;">~* MMO RPG</h1>
+          <h1 style="padding:0;margin:0;">~* MMO RPG</h1>
           
-          <a href="profile.php">
-          <div id="miniProfile">
+          <!--a href="profile.php"><div id="miniProfile">
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
             <?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?>
             <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?>
@@ -42,9 +41,30 @@ include_once("connection.php");
               <div style="background-color:lightgreen;height:12px;width:20%"></div>
             </div>
 
+          </div></a-->
+
+          <div id="headerProfile">
+            <table style="width:100%;">
+              <tr>
+                <td><?php echo $currency_symbol ?> Money</td>
+                <td><?php echo $energy_symbol ?> Energy</td>
+                <td><?php echo $level_symbol ?> Experience</td>
+                <td><a href="profile.php"><?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?></a></td>
+              </tr>
+              <tr>
+                <td><?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?></td>
+                <td><?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?></td>
+                <td colspan='2'>
+                <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?>/<b>1000</b>xp
+                  <div style="background-color:grey;margin-top:5px;">
+                    <div style="background-color:lightgreen;height:12px;width:20%"></div>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
-          </a>
-          <br><br><br><br><hr>
+
+          <hr>
           <div id="navbar">
             <a href="main.php">Home</a>
             <!--a href="profile.php">Profile</a-->
