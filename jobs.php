@@ -8,7 +8,7 @@ if(!isset($_SESSION['uid'])){
     <center><h2>Jobs</h2></center>
     <br />
 
-    <table>
+    <table id="jobsTable">
         <tr>
             <td>Description:</td>
             <td>Reward:</td>
@@ -17,16 +17,44 @@ if(!isset($_SESSION['uid'])){
         </tr>
 
         <tr class="TemplateJob">
-            <td>This is a job.</td>
+            <td><b>Basic Job</b><br><i>Get some money.</i></td>
             <td>
-                +10<?php echo $stats['currency'].$currency_symbol ?><br>
-                +100<?php echo $materials_symbol ?><br>
+                +20<?php echo $currency_symbol ?><br>
+                +50<?php echo $experience_symbol ?><br>
+                <i>
                 +1 Common Item
+                </i>
             </td>
             <td>
                 Level 1<br>
                 Energy: 1<?php echo $energy_symbol?><br>
+                <i>
                 Ammo: 50
+                </i>
+            </td>
+            <td>
+                <form action="solojob.php" method="post">
+                    <button>Go!</button>
+                </form>
+            </td>
+        </tr>
+
+        <tr class="AdvancedJob">
+            <td><b>Advanced Job</b><br><i>Do some real work.</i></td>
+            <td>
+                +100<?php echo $currency_symbol ?><br>
+                +500<?php echo $experience_symbol ?><br>
+                <i>
+                +1 Common Item<br>
+                +1 Rare Item
+                </i>
+            </td>
+            <td>
+                Level 3<br>
+                Energy: 5<?php echo $energy_symbol?><br>
+                <i>
+                Ammo: 100
+                </i>
             </td>
             <td>
                 <form action="solojob.php" method="post">

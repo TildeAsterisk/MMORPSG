@@ -9,7 +9,7 @@ if(!isset($_SESSION['uid'])){
 else{
   ?>
   <!--pre-->
-  <center><h2 style="margin:0;padding:0;"><i><?php echo ucfirst($user['username'])."</i> - ???"./*$leaderboard['overall'].*/$overall_symbol ?></h2></center><hr>
+  <center><h2 style="margin:0;padding:0;"><i><?php echo ucfirst($user['username'])."</i> - ".$leaderboard['overall'].$overall_symbol ?></h2></center><hr>
   <table cellpadding="3" cellspacing="5">
     <!--tr>
       <td>Username:</td>

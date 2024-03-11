@@ -8,11 +8,12 @@ if(!isset($_SESSION['uid'])){
   //Generate enemy stats based on job
   $enemy_stats = [  // Associative Array / Dictionary
     'attack' => 10,
-    'defense' => 0,
+    'defense' => 10,
     'currency' => 20
   ];
   $turns=1;//energy modifier?
   $job_energycost=1;
+  $job_experiencegained=50;
   //Subtract energy cost of job
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `energy`=`energy`-'".$job_energycost."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
@@ -31,15 +32,21 @@ if(!isset($_SESSION['uid'])){
       //Update subtract stolen gold from enemies current gold and update db
       //$battle1 = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$gold_stolen."' WHERE `id`='".$id."'") or die(mysqli_error($mysql));
       //$battle2 = mysqli_query($mysql,"UPDATE `stats` SET `points`=`points`+'".$gold_stolen."',`turns`=`turns`-'".$turns."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+      
+      //Add gained experience
+      $battle1 = mysqli_query($mysql,"UPDATE `stats` SET `experience`=`experience`+'".$job_experiencegained."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+
       //Add gold stolen to user points and update db
       $battle2 = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`+'".$gold_stolen."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
       $stats['currency'] += $gold_stolen;
+      
       //Enter battle log into db
       $battle3 = mysqli_query($mysql,"INSERT INTO `logs` (`attacker`,`defender`,`attacker_damage`,`defender_damage`,`currency`,`food`,`time`) 
                               VALUES ('".$_SESSION['uid']."','"."0"."','".$attack_effect."','".$defense_effect."','".$gold_stolen."','0','".time()."')") or die(mysqli_error($mysql));
       //$stats['turns'] -= $turns;
   }else{
       echo "You lost the battle!";
+      //MONEY/ENERGY penalty?
   }
 
 }

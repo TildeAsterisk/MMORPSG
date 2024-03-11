@@ -96,14 +96,25 @@ width: 25%;
 }
 
 #miniProfile {
+    /*
     float: right;
-    /*border: 1px dotted black;*/
+    
     background-color: #0000000f;
     padding:5px;
+    */
+
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-table, th, td {
+
+#jobsTable ,#jobsTable td,
+#jobsTable th{
+    
     border: 1px solid black;
     border-collapse: collapse;
+    
     padding:5px;
   }
