@@ -29,7 +29,9 @@ if(!isset($_SESSION['uid'])){
                 Ammo: 50
             </td>
             <td>
-                <button>Go!</button>
+                <form action="solojob.php" method="post">
+                    <button>Go!</button>
+                </form>
             </td>
         </tr>
         

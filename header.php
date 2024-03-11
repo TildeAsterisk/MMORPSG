@@ -35,7 +35,7 @@ include_once("connection.php");
             <a href="profile.php" class="tooltip">
             <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
             <center>   
-            <?php echo $currency_symbol."<b>".$stats['currency']."</b>"; ?>
+            <?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?>
             <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?>   
             <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?><br>
             </center>
