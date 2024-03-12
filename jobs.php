@@ -40,7 +40,7 @@ function generate_random_job() {
     $random_reward = $job_rewards[array_rand($job_rewards)];
     $random_energyCost = rand(1, 10);
     $random_attack = rand(1, 20);
-    $random_defense = rand(1,20);
+    $random_defense = rand(1,20)*rand(1, 10);
     $random_moneyReward = rand(10,50);
 
 
