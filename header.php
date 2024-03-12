@@ -56,8 +56,8 @@ include_once("connection.php");
                 <td><?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?></td>
                 <td colspan='2'>
                 <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?>/<b>1000</b>xp
-                  <div style="background-color:grey;margin-top:5px;">
-                    <div style="background-color:lightgreen;height:12px;width:20%"></div>
+                  <div id="experienceProgressBar" style="background-color:grey;margin-top:5px;">
+                    <div style="background-color:lightgreen;height:12px;width:<?php echo ($stats['experience']/1000)*100; ?>%"></div>
                   </div>
                 </td>
               </tr>
