@@ -14,23 +14,6 @@ if(!isset($_SESSION['uid'])){
             <td>Stats:</td>
             <td>Cost:</td
         </tr>
-        
-        <tr class="itemInShop">
-            <td>
-                <b>Item 1</b><br>
-                <i>This is the most basic test item.</i>
-            </td>
-            <td>
-                10<?php echo $attack_symbol?>:10<?php echo $defense_symbol?>
-            </td>
-            <td>10<?php echo $currency_symbol?></td>
-            <td>
-                <!--form action="buyitem.php" method="post">
-                <input style="width:100%;" type="submit" name="buy" value="Buy!" />
-                </form-->
-                <button style="width:100%;" onclick="">Buy!</button>
-            </td>
-        </tr>
 
         <?php
 function GenerateRandomItem() {
@@ -46,7 +29,7 @@ function GenerateRandomItem() {
     // Random properties (attack, defense, and price)
     $attack = rand(5, 20);
     $defense = rand(5, 20);
-    $price = rand(50, 200);
+    $price = rand(10, 200);
 
     // Randomly select an item name and description
     $randomName = $itemNames[array_rand($itemNames)];
@@ -62,7 +45,7 @@ function GenerateRandomItem() {
                 <i>$randomDescription</i>
             </td>
             <td>
-                $attack\⚔️:$defense\🛡️
+                $attack<b></b>⚔️<br>$defense<b></b>🛡️
             </td>
             <td>$price&#164;</td>
             <td>
@@ -83,7 +66,7 @@ function GenerateRandomItem() {
 }
 
 //Display a number of randomly generated items
-for ($i = 0; $i <= 5; $i++) {
+for ($i = 0; $i <= 4; $i++) {
     echo GenerateRandomItem();
 }
 

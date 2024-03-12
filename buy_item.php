@@ -5,7 +5,6 @@ if(!isset($_SESSION['uid'])){
     echo "You must be logged in to view this page!";
 }else{
   if(isset($_POST["buy"])){
-
     $newItem=[
       'name'        => $_POST['name'],
       'description' => $_POST['description'],
@@ -13,6 +12,12 @@ if(!isset($_SESSION['uid'])){
       'attack'      => $_POST['attack'],
       'defense'     => $_POST['defense']
     ];
+
+
+    if ($stats['currency'] < $newItem['price']){
+      echo "You can't afford that, sorry.";
+      return;
+    }
 
     //Add to inventory
     //get current inventory
