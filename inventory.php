@@ -14,6 +14,9 @@ if(!isset($_SESSION['uid'])){
     $inv_items = mysqli_fetch_assoc($get_inventory);
     //echo implode($inv_items);
     $decoded_items=json_decode(implode($inv_items),true);
+    if($decoded_items == NULL){
+        $decoded_items=[['name'=>'Starting Item']];
+    }
     foreach ($decoded_items as $item) {
         foreach($item as $property => $value){
             echo ucfirst($property).": $value<br>";

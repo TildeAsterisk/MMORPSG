@@ -58,7 +58,7 @@ if(!isset($_SESSION['uid'])){
             </td>
             <td>
                 <form action="solojob.php" method="post">
-                    <button>Go!</button>
+                    <button disabled="true">Go!</button>
                 </form>
             </td>
         </tr>
