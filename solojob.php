@@ -18,7 +18,7 @@ if(!isset($_SESSION['uid'])){
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `energy`=`energy`-'".$job_energycost."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
   //Attack Effect is = some factor * attack
-  $attack_effect = $turns * 0.1 * $stats['attack'];
+  $attack_effect = $stats['attack'];
   $defense_effect = $enemy_stats['defense'];
   
   echo "You send your warriors into battle!<br><br>";

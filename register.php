@@ -69,6 +69,7 @@ if(isset($_POST['register'])){
       }
 
       UpdateGlobalRankingStats($mysql);
+      //include("update_stats.php");
     }
   }
 }
