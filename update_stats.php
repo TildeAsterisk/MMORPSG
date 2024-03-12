@@ -1,32 +1,29 @@
 <?php
-
-$income = 2 * $unit['worker'];
-
-$farming = 5 * pow($unit['farmer'],0.5);
-
-/*
-$num1 = min($weapon['sword'],$unit['warrior']);
-
-if($num1 == $weapon['sword']){
-    $attack = (10 * $weapon['sword']) + ($unit['warrior'] - $weapon['sword']);
-}else{
-    $attack = (10 * $unit['warrior']);
+//Get player stats
+$attack = $stats['attack'];
+$defense = $stats['defense'];
+//decode player inv items JSON
+$playerInvDecoded = json_decode($inventory['items'], true);
+//Calculate total attack and defense stats of all items in inventory
+$totalInventoryAttack=0;
+$totalInventoryDefense=0;
+foreach ($playerInvDecoded as $item) {
+    foreach($item as $property => $value){
+        if($property == "attack"){
+            $totalInventoryAttack+=$value;
+        }
+        if($property == "defense"){
+            $totalInventoryDefense+=$value;
+        }
+    }
 }
 
-$num2 = min($weapon['shield'],$unit['defender']);
+$attack+=$totalInventoryAttack;
+$defense+=$totalInventoryDefense;
 
-if($num2 == $weapon['shield']){
-    $defense = (10 * $weapon['shield']) + ($unit['defender'] - $weapon['shield']);
-}else{
-    $defense = (10 * $unit['defender']);
-}
-*/
-
-$attack = (10 * $unit['warrior']);
-$defense = (10 * $unit['defender']);
 
 $update_stats = mysqli_query($mysql,"UPDATE `stats` SET 
-                            `income`='".$income."',`farming`='".$farming."',
                             `attack`='".$attack."',`defense`='".$defense."'
                             WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+
 ?>

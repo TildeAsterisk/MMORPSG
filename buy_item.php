@@ -37,6 +37,7 @@ mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
     echo "You have purchased ".$newItem['name'].".<br>";
     echo "<a href='shop.php'><button>Back to Market.</button></a><br>";
     echo "<a href='inventory.php'><button>See in Inventory.</button></a>";
+    include("update_stats.php");
 
   }
   else{
