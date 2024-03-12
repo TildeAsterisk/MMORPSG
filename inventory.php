@@ -18,12 +18,29 @@ if(!isset($_SESSION['uid'])){
         $decoded_items=[['name'=>'Starting Item']];
     }
     foreach ($decoded_items as $item) {
+        
         foreach($item as $property => $value){
             echo ucfirst($property).": $value<br>";
         }
-        echo "<br >";
+        echo "<br>";
     }
-    
+
+    $itemTemplate = <<<EOD
+        <div style="display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;" class="grid-container">
+              <div class="grid-item">
+                  <h3>$name</h3>
+                  <p>Price: $price/p>
+                  <p>Attack: $attack</p>
+                  <p>Defense: $defense</p>
+                  <p>Description: A legendary sword forged by ancient blacksmiths.</p>
+              </div>
+          </div>
+        EOD;
+    ?>
+
+    <?php
 }
 include("footer.php");
 

@@ -32,6 +32,9 @@ if(!isset($_SESSION['uid'])){
     $updateQuery = "UPDATE `inventory` SET `items` = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
 mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
 
+  //Subtract cost of item
+  $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$newItem['price']."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+
 
 
     echo "You have purchased ".$newItem['name'].".<br>";
