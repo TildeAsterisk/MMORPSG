@@ -7,12 +7,12 @@ if(!isset($_SESSION['uid'])){
   //Init job and enemy_stats
   //Generate enemy stats based on job
   $enemy_stats = [  // Associative Array / Dictionary
-    'attack' => 10,
-    'defense' => 0,
-    'currency' => 20
+    'attack' => $_POST['attack'],
+    'defense' => $_POST['defense'],
+    'currency' => $_POST['moneyReward']
   ];
   $turns=1;//energy modifier?
-  $job_energycost=1;
+  $job_energycost=$_POST['energyCost'];
   $job_experiencegained=50;
   //Subtract energy cost of job
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `energy`=`energy`-'".$job_energycost."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
