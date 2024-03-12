@@ -12,9 +12,9 @@ else{
   ?>
 
 <!--center><h1>Legend</h1></center-->
-Messages:<br>
- - Player Updates:<br>
- - Inbox:
+* Message Inbox<br>
+* Player Logs<br>
+* Inventory (Compact)<br>
 
   <?php
 }
