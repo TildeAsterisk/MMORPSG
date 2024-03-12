@@ -6,10 +6,13 @@ if(!isset($_SESSION['uid'])){
 }else{
     //UpdateGlobalRankingStats($mysql);
     ?>
-    <center><h2>Battle Players</h2></center>
+    <center><h2>Battle Players</h2>
     <br />
     <?php
     include("leaderboard.php");
+    ?>
+    </center>
+    <?php
 }
 include("footer.php");
 ?>

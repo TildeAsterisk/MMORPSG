@@ -4,6 +4,15 @@ ob_start();
 
 session_start();
 include_once("header.php");
+?>
+    <style>
+    #loginHeaderDiv{
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+    </style>
+<?php
 
 if(isset($_POST['register'])){
   $username= protect($mysql,$_POST["username"]);
@@ -65,10 +74,10 @@ if(isset($_POST['register'])){
 }
 
 ?>
-
-
-<pre> <!-- Formats all text to monosize -->
-  Registration
+<hr>
+<center><h1>Registration:</h1></center>
+<pre id="loginHeaderDiv"> <!-- Formats all text to monosize -->
+  
   <form action="register.php" method="POST">
     Username:  <input type="text" name="username"/><br />
     Password:  <input type="password" name="password"/><br />

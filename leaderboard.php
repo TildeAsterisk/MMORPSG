@@ -1,8 +1,8 @@
-<table cellpadding="2" cellspacing="2">
+<table id="leaderboardTable" cellpadding="2" cellspacing="2">
         <tr>
             <td width="50px"><b>Rank</b></td>
             <td width="142.0px"><b>Username</b></td>
-            <td width="80px"><b>Power<br>Level</b></td>
+            <td width="80px"><b>Power Level</b></td>
             <td width="80px"><b>Shmoneys</b></td>
             <!--td width="200px"><b>Points</b></td-->
         </tr>

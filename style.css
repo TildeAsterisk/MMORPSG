@@ -3,10 +3,11 @@ background-color: #C4C4C4;
 font-family: monospace;
 }
 
-/* This div has all the html in the body */
+/* This div has all the html in the body 
 #container {
 
 }
+*/
 
 /* Contains everything after Header */
 #content {
@@ -99,10 +100,8 @@ width: 25%;
 
 #miniProfile {
     float: right;
-    
     background-color: #0000000f;
     padding:5px;
-    
 }
 
 
@@ -116,5 +115,9 @@ width: 25%;
   
 #headerProfile table, #headerProfile td, #headerProfile th{
     vertical-align: text-top
-  }
-  
+}
+
+#loginHomepage{
+  width:100%;
+  margin-top:25%;
+}​

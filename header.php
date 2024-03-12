@@ -80,11 +80,13 @@ include_once("connection.php");
         }
         else{
           ?>
-          <form action="login.php" method="post" style="width:30%;">
+          <div id="loginHeaderDiv">
+          <form action="login.php" method="post" >
           Username:<input style="width:100%;" type="text" name="username"/><br />
           Password:<input style="width:100%;" type="password" name="password"/><br /><br/>
           <input type="submit" name="login" value="Log-in"/>
           </form>
+          </div>
           <?php
         }
       ?>
