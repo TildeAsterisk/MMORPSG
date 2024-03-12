@@ -17,7 +17,7 @@ if(!isset($_SESSION['uid'])){
         </tr>
 
         <?php
-function generate_random_job() {
+function generate_random_job($pAttack, $pDefense) {
     // Define lists of possible job names, descriptions, and rewards
     $job_names = ["Basic Job", "Advanced Job", "Special Job", "Secret Job"];
     $job_descriptions = [
@@ -39,9 +39,10 @@ function generate_random_job() {
     $random_description = $job_descriptions[array_rand($job_descriptions)];
     $random_reward = $job_rewards[array_rand($job_rewards)];
     $random_energyCost = rand(1, 10);
-    $random_attack = rand(1, 20);
-    $random_defense = rand(1,20)*rand(0, 1);
+    $random_attack =  rand(1, round($pAttack*1.5));
+    $random_defense = rand(1,round($pDefense*1.5));
     $random_moneyReward = rand(10,50);
+    $random_xpReward = rand(1,100);
 
 
     // Create the job HTML template
@@ -68,6 +69,7 @@ function generate_random_job() {
                     <input type="hidden" name="defense"     value="$random_defense">
                     <input type="hidden" name="energyCost"     value="$random_energyCost">
                     <input type="hidden" name="moneyReward"     value="$random_moneyReward">
+                    <input type="hidden" name="experienceReward"     value="$random_xpReward">
                 </form>
             </td>
         </tr>
@@ -78,7 +80,7 @@ function generate_random_job() {
 
 //Display a number of randomly generated items
 for ($i = 0; $i <= 4; $i++) {
-    echo generate_random_job();
+    echo generate_random_job($stats['attack'],$stats['defense']);
 }
 
 ?>

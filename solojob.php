@@ -13,7 +13,7 @@ if(!isset($_SESSION['uid'])){
   ];
   $turns=1;//energy modifier?
   $job_energycost=$_POST['energyCost'];
-  $job_experiencegained=50;
+  $job_experiencegained=$_POST['experienceReward'];
   //Subtract energy cost of job
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `energy`=`energy`-'".$job_energycost."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
