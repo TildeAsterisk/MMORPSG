@@ -1,7 +1,7 @@
 <?php
 //Get player stats
-$attack = $stats['attack'];
-$defense = $stats['defense'];
+$attack = 0;
+$defense = 0;
 //decode player inv items JSON
 $playerInvDecoded = json_decode($inventory['items'], true);
 //Calculate total attack and defense stats of all items in inventory
