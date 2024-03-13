@@ -32,10 +32,12 @@ if(!isset($_SESSION['uid'])){
                     <form action="drop_item.php" method="post">
                         <input style="width:100%;" type="submit" name="drop" value="Drop" />
                         <!-- Additional input fields -->
-                        <input type="hidden" name="item" value="{$itemEncoded}">
+                        <input type="hidden" name="item" value="{$itemEncoded}" />
                     </form>
                     <form action="sell_item.php" method="post">
-                        <input style="width:100%;" type="submit" name="sell" value="Sell" />
+                        <input style="width:100%;" type="submit" name="sell" value="sell" />
+                        <!-- Additional input fields -->
+                        <input type="hidden" name="item" value="{$itemEncoded}" />
                     </form>
                 </td>
             </tr>
