@@ -18,6 +18,6 @@ else{
 
   <?php
 }
-//include("update_stats.php");
+include("update_stats.php");
 include("footer.php");
 ?>

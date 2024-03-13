@@ -25,6 +25,8 @@ if(!isset($_SESSION['uid'])){
             <td><b>{$item['name']}</b></td>
             <td>{$item['attack']}$attack_symbol</td>
             <td>{$item['defense']}$defense_symbol</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td colspan='3'><i>{$item['description']}</i></td>
@@ -34,9 +36,9 @@ if(!isset($_SESSION['uid'])){
                     <input style="width:100%;" type="submit" name="drop" value="Drop" />
                     <input type="hidden" name="item" value="$escapedItem" >
                 </form>
-                <form action="sell_item.php" method="post">
+                <!--form action="sell_item.php" method="post">
                     <input style="width:100%;" type="submit" name="sell" value="Sell" />
-                </form>
+                </form-->
             </td>
         </tr>
         <tr>
