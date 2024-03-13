@@ -1,9 +1,14 @@
 <?php
 //Get player stats
-$attack = 0;
-$defense = 0;
+$attack = 5;
+$defense = 5;
+
+
+$getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+$playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
 //decode player inv items JSON
-$playerInvDecoded = json_decode($inventory['items'], true);
+$playerInvDecoded = json_decode($playerInv['items'], true);
+
 //Calculate total attack and defense stats of all items in inventory
 $totalInventoryAttack=0;
 $totalInventoryDefense=0;

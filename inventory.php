@@ -11,9 +11,14 @@ if(!isset($_SESSION['uid'])){
     <?php
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
+    if($playerInv['items'] == NULL){
+        echo "Your inventory is empty.<br>";
+        return;
+    }
     $playerInvDecoded = json_decode($playerInv['items'], true);
 
     echo "<center><table id='inventoryTable'>";
+    
     // Iterate over each item and format the template
     foreach ($playerInvDecoded as $item) {
         $itemEncoded=json_encode($item);
@@ -50,8 +55,13 @@ if(!isset($_SESSION['uid'])){
         echo $item_template;
     }
     echo "</table></center>";
+    
+
+    
 
 }
+include("update_stats.php");
+
 include("footer.php");
 
 ?>
