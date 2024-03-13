@@ -28,10 +28,9 @@ function generate_random_job($pAttack, $pDefense) {
         "Do some real work."
     ];
     $job_rewards = [
-        "+20 coins",
-        "+50 experience points",
         "+1 Common Item",
-        "+10 reputation points"
+        "+1 Medium Item",
+        "+1 Rare Item"
     ];
 
     // Randomly select a name, description, and reward
@@ -50,14 +49,14 @@ function generate_random_job($pAttack, $pDefense) {
         <tr class="TemplateJob">
             <td><b>$random_name</b><br><i>$random_description</i></td>
             <td>
-                $random_reward<br>
-                <i>+1 Common Item</i>
+                +??&#164;<br>
+                +50xp<br>
+                <i>$random_reward</i>
             </td>
             <td>
                 Energy: $random_energyCost<b></b>⚡<br>
                 $random_attack&#9876;
-                $random_defense<b>&#128737;</b><br>
-                <i>Ammo: 50</i>
+                $random_defense<b>&#128737;</b>
             </td>
             <td>
                 <form action="solojob.php" method="post">
