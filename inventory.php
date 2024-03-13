@@ -10,37 +10,44 @@ if(!isset($_SESSION['uid'])){
     
     <?php
 
-    $get_inventory = mysqli_query($mysql,"SELECT `items` FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-    $inv_items = mysqli_fetch_assoc($get_inventory);
-    //echo implode($inv_items);
-    $decoded_items=json_decode(implode($inv_items),true);
-    if($decoded_items == NULL){
-        $decoded_items=[['name'=>'Starting Item']];
-    }
-    foreach ($decoded_items as $item) {
-        
-        foreach($item as $property => $value){
-            echo ucfirst($property).": $value<br>";
-        }
-        echo "<br>";
-    }
+    $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
+    $playerInvDecoded = json_decode($playerInv['items'], true);
 
-    $itemTemplate = <<<EOD
-        <div style="display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;" class="grid-container">
-              <div class="grid-item">
-                  <h3>$name</h3>
-                  <p>Price: $price/p>
-                  <p>Attack: $attack</p>
-                  <p>Defense: $defense</p>
-                  <p>Description: A legendary sword forged by ancient blacksmiths.</p>
-              </div>
-          </div>
+    echo "<table id='inventoryTable'>";
+    // Iterate over each item and format the template
+    foreach ($playerInvDecoded as $item) {
+        $itemEncoded=json_encode($item);
+        // Define the item template
+        $item_template = <<<EOD
+            <tr>
+                <td><b>{$item['name']}</b></td>
+                <td>{$item['attack']}$attack_symbol</td>
+                <td>{$item['defense']}$defense_symbol</td>
+            </tr>
+            <tr>
+                <td colspan='3'><i>{$item['description']}</i></td>
+                <td>{$item['price']}$currency_symbol</td>
+                <td>
+                    <form action="drop_item.php" method="post">
+                        <input style="width:100%;" type="submit" name="drop" value="Drop" />
+                        <!-- Additional input fields -->
+                        <input type="hidden" name="item" value="{$itemEncoded}">
+                    </form>
+                    <form action="sell_item.php" method="post">
+                        <input style="width:100%;" type="submit" name="sell" value="Sell" />
+                    </form>
+                </td>
+            </tr>
+            <tr>
+            <td colspan='5'><hr></td>
+            </tr>
         EOD;
-    ?>
+        $formatted_template = strtr($item_template, $item);
+        echo $formatted_template;
+    }
+    echo "</table>";
 
-    <?php
 }
 include("footer.php");
 

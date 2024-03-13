@@ -120,4 +120,10 @@ width: 25%;
 #loginHomepage{
   width:100%;
   margin-top:25%;
-}​
+}
+
+#inventoryTable, #inventoryTable td, #inventoryTable th{
+  /*border: 1px solid black;*/
+  border-collapse: collapse;
+  padding:5px;
+}

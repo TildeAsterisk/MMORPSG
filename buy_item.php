@@ -22,7 +22,6 @@ if(!isset($_SESSION['uid'])){
     //Add to inventory
     //get current inventory
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
     $playerInvDecoded = json_decode($playerInv['items'], true);
     array_push($playerInvDecoded, $newItem);
@@ -30,7 +29,7 @@ if(!isset($_SESSION['uid'])){
     //update JSON in DB
     //$updatePlayerInvQuery = mysqli_query($mysql,"UPDATE `inventory` SET `items`=`items`+'".$newItemJson."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $updateQuery = "UPDATE `inventory` SET `items` = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
-mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
+    mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
 
   //Subtract cost of item
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$newItem['price']."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
