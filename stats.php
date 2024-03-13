@@ -27,14 +27,14 @@ if(!isset($_SESSION['uid'])){
     <center><h2>Visiting: <b><i><?php echo $s_user['username']; ?></i></b></h2></center>
     <br />
     <?php
-    echo $s_user['username'];
+    //echo $s_user['username'];
       ?>
       <br /><br />
-      <b>Power Level: <?php echo $s_rank['overall']; ?></b> 
+      <b>Power Level: <?php echo $s_rank['overall'].$overall_symbol; ?></b> 
       <br />
-      <b>Gold: <?php echo $s_stats['currency']; ?></b> 
-      <!--br />
-      <b>Points: <?php echo number_format($s_stats['points']); ?></b-->
+      <b>Gold: <?php echo $s_stats['currency'].$currency_symbol; ?></b> 
+      <br>
+      <b>Experience: <?php echo number_format($s_stats['experience'])."xp"; ?></b-->
       <br />
       <br />
       <form action="battle.php" method="post">
@@ -46,31 +46,29 @@ if(!isset($_SESSION['uid'])){
       <?php
       if(mysqli_num_rows($attacks_check) < 5){
       ?>
-      <table>
+      <!--table>
         <tr>
           <td>Send Warriors:</td>
           <td><input type="range" name="turns" min="0" max="10" value="1" step="1" oninput="this.nextElementSibling.value = this.value+' Unit(s)' " /><output>1 Unit(s)</output></td>
           <td></td>
         </tr>
 
-        <!--tr>
+        <tr>
           <td>Send Scouts:</td>
           <td><input type="range" name="turns" min="0" max="10" value="1" step="1" oninput="this.nextElementSibling.value = this.value+' Unit(s)' " disabled="disabled" /><output>1 Unit(s)</output></td>
           <td></td>
-        </tr-->
-      </table>
+        </tr>
+      </table-->
 
       
 
       <br>
-      <input type="submit" name="trade" value="Trade
-Units" disabled="disabled" />
-<input type="submit" name="battle" value="Send
-Attackers" />
-<input type="submit" name="scout" value="Send
-Scouts" disabled="disabled" />
-      <!--input type="submit" name="food" value="Raid for Food" /-->
+      
+      <input type="submit" name="battle" value="⚔️ Attack" />
+      <input type="submit" name="trade" value="🎁 Trade" disabled="disabled" />
+      <input type="submit" name="message" value="✉️ Message" disabled="disabled" />
       <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+      <input type="hidden" name="enemyName" value="<?php echo $s_user['username']; ?>"/>
 
       <?php
       }

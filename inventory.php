@@ -30,13 +30,8 @@ if(!isset($_SESSION['uid'])){
             <td><b>{$item['name']}</b></td>
             <td>{$item['attack']}$attack_symbol</td>
             <td>{$item['defense']}$defense_symbol</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan='3'><i>{$item['description']}</i></td>
-            <td>{$item['price']}$currency_symbol</td>
-            <td>
+            <td rowspan='2'>{$item['price']}$currency_symbol</td>
+            <td rowspan='2'>
                 <form action="drop_item.php" method="post">
                     <input style="width:100%;" type="submit" name="drop" value="Drop" />
                     <input type="hidden" name="item" value="$escapedItem" >
@@ -45,6 +40,9 @@ if(!isset($_SESSION['uid'])){
                     <input style="width:100%;" type="submit" name="sell" value="Sell" />
                 </form-->
             </td>
+        </tr>
+        <tr>
+            <td colspan='3'><i>{$item['description']}</i></td>
         </tr>
         <tr>
             <td colspan='5'><hr></td>

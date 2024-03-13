@@ -4,6 +4,13 @@ include("header.php");
 if(!isset($_SESSION['uid'])){
     echo "You must be logged in to view this page!";
 }else{
+
+  if ($stats['energy'] < $_POST['energyCost']){
+    echo "You don't have enough energy for this job.";
+    echo "<br>Wait a while for your energy to regenerate.";
+    return;
+  }
+
   //Init job and enemy_stats
   //Generate enemy stats based on job
   $enemy_stats = [  // Associative Array / Dictionary
