@@ -7,46 +7,47 @@ if(!isset($_SESSION['uid'])){
     ?>
     <center><h2>Inventory</h2></center>
     <br />
-    
-    <?php
 
+    <?php
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
     $playerInvDecoded = json_decode($playerInv['items'], true);
 
-    echo "<table id='inventoryTable'>";
+    echo "<center><table id='inventoryTable'>";
     // Iterate over each item and format the template
     foreach ($playerInvDecoded as $item) {
         $itemEncoded=json_encode($item);
+        $escapedItem = htmlspecialchars($itemEncoded, ENT_QUOTES, 'UTF-8');
+
         // Define the item template
         $item_template = <<<EOD
-            <tr>
-                <td><b>{$item['name']}</b></td>
-                <td>{$item['attack']}$attack_symbol</td>
-                <td>{$item['defense']}$defense_symbol</td>
-            </tr>
-            <tr>
-                <td colspan='3'><i>{$item['description']}</i></td>
-                <td>{$item['price']}$currency_symbol</td>
-                <td>
-                    <form action="drop_item.php" method="post">
-                        <input style="width:100%;" type="submit" name="drop" value="Drop" />
-                        <!-- Additional input fields -->
-                        <input type="hidden" name="item" value="{$itemEncoded}">
-                    </form>
-                    <form action="sell_item.php" method="post">
-                        <input style="width:100%;" type="submit" name="sell" value="Sell" />
-                    </form>
-                </td>
-            </tr>
-            <tr>
+        <tr>
+            <td><b>{$item['name']}</b></td>
+            <td>{$item['attack']}$attack_symbol</td>
+            <td>{$item['defense']}$defense_symbol</td>
+        </tr>
+        <tr>
+            <td colspan='3'><i>{$item['description']}</i></td>
+            <td>{$item['price']}$currency_symbol</td>
+            <td>
+                <form action="drop_item.php" method="post">
+                    <input style="width:100%;" type="submit" name="drop" value="Drop" />
+                    <input type="hidden" name="item" value="$escapedItem" >
+                </form>
+                <form action="sell_item.php" method="post">
+                    <input style="width:100%;" type="submit" name="sell" value="Sell" />
+                </form>
+            </td>
+        </tr>
+        <tr>
             <td colspan='5'><hr></td>
-            </tr>
+        </tr>
         EOD;
-        $formatted_template = strtr($item_template, $item);
-        echo $formatted_template;
+
+        //THIS IS UNNECESSARY AND CAUSED ERROR!!! //$formatted_template = strtr($item_template, $item);
+        echo $item_template;
     }
-    echo "</table>";
+    echo "</table></center>";
 
 }
 include("footer.php");
