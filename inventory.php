@@ -30,12 +30,12 @@ if(!isset($_SESSION['uid'])){
                 <td>{$item['price']}$currency_symbol</td>
                 <td>
                     <form action="drop_item.php" method="post">
-                        <input style="width:100%;" type="submit" name="drop" value="Drop" />
+                        <input disabled="true" style="width:100%;" type="submit" name="drop" value="Drop" />
                         <!-- Additional input fields -->
                         <input type="hidden" name="item" value="{$itemEncoded}" />
                     </form>
                     <form action="sell_item.php" method="post">
-                        <input style="width:100%;" type="submit" name="sell" value="sell" />
+                        <input disabled="true" style="width:100%;" type="submit" name="sell" value="sell" />
                         <!-- Additional input fields -->
                         <input type="hidden" name="item" value="{$itemEncoded}" />
                     </form>
