@@ -21,18 +21,42 @@ if(!isset($_SESSION['uid'])){
   $attack_effect = $stats['attack'];
   $defense_effect = $enemy_stats['defense'];
   
-  echo "You send your warriors into battle!<br><br>";
-  echo "Your warriors dealt " . number_format($attack_effect) . " damage!<br>";
-  echo "The enemy's defenders dealt " . number_format($defense_effect) . " damage!<br><br>";
+  $miniStatsProfile=<<<EOD
+  <table style='width:100%;text-align:center;'>
+  <tr>
+      <td>
+        <b>{$user['username']}</b>
+      </td>
+      <td rowspan='2'>Vs.</td>
+      <td>
+        <b>Enemy</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {$stats['attack']}$attack_symbol {$stats['defense']}$defense_symbol
+      </td>
+      <td>
+        {$enemy_stats['attack']}$attack_symbol {$enemy_stats['defense']}$defense_symbol
+      </td>
+    </tr>
+  </table>
+  EOD;
+  
+  echo "You prepare for battle.<br><br>";
+  echo $miniStatsProfile;
+  /*echo "Your Stats: ATK:{$stats['attack']} DEF:{$stats['defense']}";
+  echo "<br><br>You evaluate the enemies defenses...<br>";
+  echo "Enemy Stats: ATK:{$enemy_stats['attack']} DEF:{$enemy_stats['defense']}";*/
   if($attack_effect > $defense_effect){
       $ratio = ($attack_effect - $defense_effect)/$attack_effect * $turns;
       $ratio = min($ratio,1);
       $gold_stolen = (int)floor($ratio/2 * $enemy_stats['currency']);
-      echo "You won the battle! You stole " . $gold_stolen . " gold!";
-      //Update subtract stolen gold from enemies current gold and update db
-      //$battle1 = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$gold_stolen."' WHERE `id`='".$id."'") or die(mysqli_error($mysql));
-      //$battle2 = mysqli_query($mysql,"UPDATE `stats` SET `points`=`points`+'".$gold_stolen."',`turns`=`turns`-'".$turns."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-      
+      echo "<br>You defeated the enemy!<br> You stole " . $gold_stolen . " gold!";
+
+      echo "<br><br>You completed the Job.<br>";
+      echo "<center><h3>Completed the Job successfully!</h3></center>";
+
       //Add gained experience
       $battle1 = mysqli_query($mysql,"UPDATE `stats` SET `experience`=`experience`+'".$job_experiencegained."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
@@ -45,9 +69,12 @@ if(!isset($_SESSION['uid'])){
                               VALUES ('".$_SESSION['uid']."','"."0"."','".$attack_effect."','".$defense_effect."','".$gold_stolen."','0','".time()."')") or die(mysqli_error($mysql));
       //$stats['turns'] -= $turns;
   }else{
-      echo "You lost the battle!";
-      //MONEY/ENERGY penalty?
+    echo "<br><br>The enemies defenses were too strong...<br>";
+    echo "<center><h3>You failed the Job.</h3></center>";
+    //MONEY/ENERGY penalty?
   }
+
+  echo "<center><a href='jobs.php'><button>Do another Job.</button></a><center>";
 
 }
 include("footer.php");
