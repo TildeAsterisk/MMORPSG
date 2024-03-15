@@ -68,14 +68,83 @@ function UpdateGlobalRankingStats($mysql){
         $i++;
     }
 }
+function GenerateRandomItem() {
+    // Random item name and description
+    $itemNames = ["Sword of Valor", "Enchanted Amulet", "Dragonhide Boots", "Crystal Wand"];
+    $itemDescriptions = [
+        "A legendary sword forged by ancient blacksmiths.",
+        "A mystical amulet that grants its wearer enhanced abilities.",
+        "Sturdy boots made from the hide of a fire-breathing dragon.",
+        "A magical wand that channels elemental energy."
+    ];
+
+    // Random properties (attack, defense, and price)
+    $attack = rand(5, 20);
+    $defense = rand(5, 20);
+    $price = rand(10, 200);
+
+    // Randomly select an item name and description
+    $randomName = $itemNames[array_rand($itemNames)];
+    $randomDescription = $itemDescriptions[array_rand($itemDescriptions)];
+
+    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}'}";
+    //Replace single quotes with double to allow for json decode
+    $randomNewItem=str_replace("'",'"', $randomNewItem);
+    $randomNewItem=json_decode($randomNewItem);
+
+    // Construct the item template
+    $itemTemplate = <<<EOD
+        <tr class="itemInShop">
+            <td>
+                <b>$randomName</b><br>
+                <i>$randomDescription</i>
+            </td>
+            <td>
+                $attack<b></b>⚔️<br>$defense<b></b>🛡️
+            </td>
+            <td>$price&#164;</td>
+            <td>
+                <form action="buy_item.php" method="post">
+                    <input style="width:100%;" type="submit" name="buy" value="Buy!" />
+                    <!-- Additional input fields -->
+                    <input type="hidden" name="name"        value="$randomName">
+                    <input type="hidden" name="description" value="$randomDescription">
+                    <input type="hidden" name="price"       value="$price">
+                    <input type="hidden" name="attack"      value="$attack">
+                    <input type="hidden" name="defense"     value="$defense">
+                </form>
+            </td>
+        </tr>
+    EOD;
+    //var_dump($randomNewItem);
+    return [$randomNewItem,$itemTemplate];
+}
+
+function GenerateRandomEnemyName() {
+    $adjectives = ["Fierce", "Sinister", "Vengeful", "Dreadful", "Malevolent","Fancy", "Sinister", "Vivacious", "Quirky", "Radiant", "Melancholic", "Surreal", "Zesty", "Ethereal", "Whimsical", "Resilient", "Inquisitive", "Serene", "Luminous", "Mysterious", "Exuberant", "Gloomy", "Captivating", "Dynamic", "Harmonious", "Eloquent", "Jubilant", "Nebulous", "Enchanting", "Audacious", "Tranquil", "Pensive", "Effervescent", "Candid", "Ephemeral", "Euphoric", "Sardonic", "Bewitched", "Placid", "Vibrant", "Tenacious", "Spirited", "Elusive", "Solemn", "Furtive", "Lively", "Enigmatic", "Soothing", "Zealous", "Wistful", "Chimerical", "Incandescent"];
+    $nouns = ["Dragon", "Orc", "Serpent", "Wraith", "Goblin", "Troll", "Banshee", "Harpy", "Minotaur", "Wyvern", "Lich", "Cyclops", "Basilisk", "Chimera", "Succubus", "Zombie", "Ghoul", "Vampire", "Werewolf", "Manticore", "Kraken", "Siren", "Gargoyle", "Imp", "Ghost", "Skeleton", "Centaur", "Medusa", "Djinn", "Slime", "Specter", "Gnoll", "Harbinger", "Revenant", "Crawler", "Shadow", "Naga", "Elemental", "Griffon", "Banshee", "Lamia", "Cerberus", "Satyr", "Gorgon", "Bogeyman", "Chupacabra"];
+
+    $randomAdjective = $adjectives[array_rand($adjectives)];
+    $randomNoun = $nouns[array_rand($nouns)];
+
+    $enemyName = $randomAdjective . " " . $randomNoun;
+    return $enemyName;
+}
 
 
-function GenerateRandomEnemy($stats){
+function GenerateRandomEnemy($stats,$inventory){
     $stats = [  // Associative Array / Dictionary
-        'name'    => $stats['name'] ?? "Enemy Name",
+        'name'    => $stats['name'] ?? GenerateRandomEnemyName(),
         'attack'    => $stats['attack'] ?? 10,
         'defense'   => $stats['defense'] ?? 10,
-        'currency'  => $stats['currency'] ?? 10
+        'currency'  => $stats['currency'] ?? 10,
+        'equipment' => [
+            'weapon'    => $inventory['weapon'] ?? GenerateRandomitem()[0],
+            'head'      => $inventory['head'] ??  GenerateRandomitem()[0],
+            'torso'     => $inventory['torso'] ??  GenerateRandomitem()[0],
+            'legs'      => $inventory['legs'] ??  GenerateRandomitem()[0],
+            'feet'      => $inventory['feet'] ??  GenerateRandomitem()[0]
+        ]
     ];
     return $stats;
 }
