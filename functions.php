@@ -91,10 +91,11 @@ function GenerateRandomItem() {
     $randomItemType = $itemTypes[array_rand($itemTypes)];
 
 
-    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}, 'itemType': '{$randomItemType}'}";
+    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}', 'itemType': '{$randomItemType}'}";
     //Replace single quotes with double to allow for json decode
     $randomNewItem=str_replace("'",'"', $randomNewItem);
-    $randomNewItem=json_decode($randomNewItem);
+    //var_dump($randomNewItem);
+    //$randomNewItem=json_decode($randomNewItem);
 
     // Construct the item template
     $itemTemplate = <<<EOD
@@ -121,7 +122,6 @@ function GenerateRandomItem() {
             </td>
         </tr>
     EOD;
-    //var_dump($randomNewItem);
     return [$randomNewItem,$itemTemplate];
 }
 

@@ -36,7 +36,7 @@ if(!isset($_SESSION['uid'])){
 
     $playerInvJson = json_encode($playerInvDecoded);
     //update JSON in DB
-    //$updatePlayerInvQuery = mysqli_query($mysql,"UPDATE `inventory` SET `items`=`items`+'".$newItemJson."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    //Shouls add item to inventory
     $updateQuery = "UPDATE `inventory` SET $itemType = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
     mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
 
