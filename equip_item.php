@@ -35,10 +35,13 @@ if(!isset($_SESSION['uid'])){
     $playerInvDecoded = $playerInv;
     //Push new item to player inventory
     $playerInvDecoded[$itemType]= $newItemDecoded;
+
+    //remove equipped item from inventory
+
+    DropItemFromInventory($mysql, $newItem);
+
     //encode inventory and update DB
     $playerInvJson = json_encode($playerInvDecoded[$itemType]);
-
-    //Should Remove item from inventory
 
     //update JSON in DB
     $updateQuery = "UPDATE `inventory` SET $itemType = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
