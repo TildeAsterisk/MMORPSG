@@ -18,6 +18,8 @@ if(!isset($_SESSION['uid'])){
     'defense' => $_POST['defense'],
     'currency' => $_POST['moneyReward']
   ];
+  $newRandomEnemy=GenerateRandomEnemy($enemy_stats);
+
   $turns=1;//energy modifier?
   $job_energycost=$_POST['energyCost'];
   $job_experiencegained=$_POST['experienceReward'];
@@ -36,7 +38,7 @@ if(!isset($_SESSION['uid'])){
       </td>
       <td rowspan='2'>Vs.</td>
       <td>
-        <b>Enemy</b>
+        <b>{$newRandomEnemy['name']}</b>
       </td>
     </tr>
     <tr>
@@ -52,9 +54,19 @@ if(!isset($_SESSION['uid'])){
   
   echo "You prepare for battle.<br><br>";
   echo $miniStatsProfile;
-  /*echo "Your Stats: ATK:{$stats['attack']} DEF:{$stats['defense']}";
-  echo "<br><br>You evaluate the enemies defenses...<br>";
-  echo "Enemy Stats: ATK:{$enemy_stats['attack']} DEF:{$enemy_stats['defense']}";*/
+  
+  //Generate the battle 
+  $weaponTxt = $inventory['weapon']??"bare hands";
+  //my attack thier defense, dmg=myattack-hisdefense
+  $damageDealt   = $attack_effect-$defense_effect;
+  if($damageDealt < 0){$damageDealt=0;}
+  $damageBlocked = $attack_effect - $damageDealt;
+  $blockedPercentage=round(($damageBlocked/$attack_effect)*100);
+  echo "You prepare to hit {$newRandomEnemy['name']} with your {$weaponTxt}<br>";
+  //echo "[Calculate the chance to hit...]<br>";
+  echo "Your hit lands on [Enemy] [Equipment] with a force of {$attack_effect}. <br>Their [defenses] soaked up {$blockedPercentage}% of the damage and you dealtt {$damageDealt} damage.<br>";
+
+
   if($attack_effect > $defense_effect){
       $ratio = ($attack_effect - $defense_effect)/$attack_effect * $turns;
       $ratio = min($ratio,1);

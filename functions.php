@@ -70,4 +70,15 @@ function UpdateGlobalRankingStats($mysql){
 }
 
 
+function GenerateRandomEnemy($stats){
+    $stats = [  // Associative Array / Dictionary
+        'name'    => $stats['name'] ?? "Enemy Name",
+        'attack'    => $stats['attack'] ?? 10,
+        'defense'   => $stats['defense'] ?? 10,
+        'currency'  => $stats['currency'] ?? 10
+    ];
+    return $stats;
+}
+
+
 

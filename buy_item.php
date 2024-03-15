@@ -23,6 +23,10 @@ if(!isset($_SESSION['uid'])){
     //get current inventory
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
+    if (sizeof($playerInv) > $inventory['capacity']){
+      echo "Your inventory is full.";
+      return;
+    }
     if($playerInv['items'] == NULL){
       $playerInv['items']='{}';
     }
