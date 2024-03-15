@@ -189,32 +189,34 @@ function GenerateEquipmentSlotHTML($item, $equipmentType, $inventory){
 
     $equipDropdownOptionsHTML="";
     //var_dump($inventory);
-    $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
+    //$itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
     //Look for equippable items in inventory
     foreach ($inventory as $key => $value) {
         //if(empty((array)$value)){continue;}
         $itemType = $value['itemType'] ;
         $itemName = $value['name'] ;
+        //var_dump((object)$value);
+        $encodedValue = htmlspecialchars(json_encode((object)$value,true), ENT_QUOTES, 'UTF-8');
         if($itemType == $equipmentType){
-            $equipDropdownOptionsHTML .= "<option value='{$itemType}'>{$itemName}</option>";
+            $equipDropdownOptionsHTML .= "<option name='{$itemType}' value='{$encodedValue}'>{$itemName}</option>";
         }
-        
-        
     }
 
     $emptySlotHTML=<<<EOD
     <tr>
+    <form action="equip_item.php" method="post">
             <td><b>{$equipmentType}</b></td>
-            <td colspan='4'>
-                <form action="equip_item.php" method="post">
-                    <select name="equipmentSelection" onchange="this.form.submit()" style="width:100%;">
-                        "<option value='None'>None</option>"
-                        $equipDropdownOptionsHTML
-                    </select>
-                    <!--input type="submit" name="equip" value="equip" /-->
-                    <input type="hidden" name="item" value="$escapedItem" >
-                </form>
+            <td colspan='3'>
+                <select name="equipmentSelection" onchange="this.form.submit()" style="width:100%;">
+                    "<option value='None'>None</option>"
+                    $equipDropdownOptionsHTML
+                </select>
+                <input type="hidden" name="item" value="$escapedItem" >
             </td>
+            <td>
+                <input type="submit" value="equip">
+            </td>
+        </form>
         </tr>
         <tr>
             <td colspan='5'><hr></td>
