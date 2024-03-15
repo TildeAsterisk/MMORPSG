@@ -168,7 +168,7 @@ function GenerateEquipmentSlotHTML($item, $equipmentType){
             <td rowspan='2'>
                 <form action="unequip_item.php" method="post">
                     <input style="width:100%;" type="submit" name="unequip" value="Unequip" />
-                    <input type="hidden" name="item" value="$escapedItem" >
+                    <input type="hidden" name="itemType" value="$equipmentType" >
                 </form>
             </td>
         </tr>
