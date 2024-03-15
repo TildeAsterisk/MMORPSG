@@ -10,7 +10,8 @@ if(!isset($_SESSION['uid'])){
       'description' => $_POST['description'],
       'price'       => $_POST['price'],
       'attack'      => $_POST['attack'],
-      'defense'     => $_POST['defense']
+      'defense'     => $_POST['defense'],
+      'itemType'     => $_POST['itemType']
     ];
 
 
@@ -23,12 +24,16 @@ if(!isset($_SESSION['uid'])){
     //get current inventory
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
-    if (sizeof($playerInv) > $inventory['capacity']){
+    $playerInvDecoded=json_decode($playerInv['items']);
+
+    //if inventory is at capacity
+    if (sizeof((array)$playerInvDecoded) >= $inventory['capacity']) {
       echo "Your inventory is full.";
+      
       return;
     }
-    if($playerInv['items'] == NULL){
-      $playerInv['items']='{}';
+    if($playerInv == NULL){
+      $playerInv='{}';
     }
     $playerInvDecoded = json_decode($playerInv['items'], true);
     array_push($playerInvDecoded, $newItem);

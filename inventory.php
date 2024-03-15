@@ -30,10 +30,10 @@ if(!isset($_SESSION['uid'])){
     <center>
     <table style='width:100%;background-color:rgba(0, 0, 0, 0.1);'>
         <?php 
-        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['head'], EQUIPMENT_HEAD);
-        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['torso'],EQUIPMENT_TORSO);
-        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['legs'], EQUIPMENT_LEGS);
-        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['feet'], EQUIPMENT_FEET);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['head'], EQUIPMENT_HEAD, $playerInvDecoded);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['torso'],EQUIPMENT_TORSO,$playerInvDecoded);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['legs'], EQUIPMENT_LEGS, $playerInvDecoded);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['feet'], EQUIPMENT_FEET, $playerInvDecoded);
         ?>
     </table>
     </center>

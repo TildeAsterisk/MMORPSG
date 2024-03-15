@@ -10,7 +10,7 @@ else{
     //echo "Removing item:<br>{$_POST['item']}<br><br>From inv:<br>";
     //echo $inventory['items']."<br>";
 
-    //header('Location: //inventory.php');
+    //header('Location: inventory.php');
     //exit();
     
     
@@ -52,6 +52,7 @@ function DropItemFromInventory($mysql,$item){
 
 }
 
+echo "<br><a href='inventory.php'><button>See Inventory.</button></a>";
 
 include("footer.php");
 ?>

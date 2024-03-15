@@ -83,11 +83,15 @@ function GenerateRandomItem() {
     $defense = rand(5, 20);
     $price = rand(10, 200);
 
+    $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
+
     // Randomly select an item name and description
     $randomName = $itemNames[array_rand($itemNames)];
     $randomDescription = $itemDescriptions[array_rand($itemDescriptions)];
+    $randomItemType = $itemTypes[array_rand($itemTypes)];
 
-    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}'}";
+
+    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}, 'itemType': '{$randomItemType}'}";
     //Replace single quotes with double to allow for json decode
     $randomNewItem=str_replace("'",'"', $randomNewItem);
     $randomNewItem=json_decode($randomNewItem);
@@ -112,6 +116,7 @@ function GenerateRandomItem() {
                     <input type="hidden" name="price"       value="$price">
                     <input type="hidden" name="attack"      value="$attack">
                     <input type="hidden" name="defense"     value="$defense">
+                    <input type="hidden" name="itemType"     value="$randomItemType">
                 </form>
             </td>
         </tr>
@@ -153,7 +158,7 @@ define("EQUIPMENT_HEAD",  "Head Gear");
 define("EQUIPMENT_TORSO", "Gear");
 define("EQUIPMENT_LEGS",  "Bottoms");
 define("EQUIPMENT_FEET",  "Footwear");
-function GenerateEquipmentSlotHTML($item, $equipmentType){
+function GenerateEquipmentSlotHTML($item, $equipmentType, $inventory){
     $itemEncoded=json_encode($item) ?? '{}';
     $escapedItem = htmlspecialchars($itemEncoded, ENT_QUOTES, 'UTF-8');
 
@@ -182,15 +187,29 @@ function GenerateEquipmentSlotHTML($item, $equipmentType){
         return $item_template;
     }
 
+    $equipDropdownOptionsHTML="";
+    //var_dump($inventory);
+    $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
+    //Look for equippable items in inventory
+    foreach ($inventory as $key => $value) {
+        //if(empty((array)$value)){continue;}
+        $itemType = $value['itemType'] ;
+        $itemName = $value['name'] ;
+        if($itemType == $equipmentType){
+            $equipDropdownOptionsHTML .= "<option value='{$itemType}'>{$itemName}</option>";
+        }
+        
+        
+    }
+
     $emptySlotHTML=<<<EOD
     <tr>
             <td><b>{$equipmentType}</b></td>
             <td colspan='4'>
-                <form action="equip_item" method="post">
-                    <select name="equipmentSelection" style="width:100%;">
-                        <option value="1">Aghjf Hat</option>
-                        <option value="2">Helmet of hjksdfg</option>
-                        <option value="3">Hood of hjshfj</option>
+                <form action="equip_item.php" method="post">
+                    <select name="equipmentSelection" onchange="this.form.submit()" style="width:100%;">
+                        "<option value='None'>None</option>"
+                        $equipDropdownOptionsHTML
                     </select>
                     <!--input type="submit" name="equip" value="equip" /-->
                     <input type="hidden" name="item" value="$escapedItem" >
