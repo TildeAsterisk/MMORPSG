@@ -174,6 +174,7 @@ function GenerateEquipmentSlotHTML($item, $equipmentType, $inventory){
                 <form action="unequip_item.php" method="post">
                     <input style="width:100%;" type="submit" name="unequip" value="Unequip" />
                     <input type="hidden" name="itemType" value="$equipmentType" >
+                    <input type="hidden" name="item" value="$escapedItem" >
                 </form>
             </td>
         </tr>
@@ -206,15 +207,12 @@ function GenerateEquipmentSlotHTML($item, $equipmentType, $inventory){
     <tr>
     <form action="equip_item.php" method="post">
             <td><b>{$equipmentType}</b></td>
-            <td colspan='3'>
+            <td colspan='4'>
                 <select name="equipmentSelection" onchange="this.form.submit()" style="width:100%;">
                     "<option value='None'>None</option>"
                     $equipDropdownOptionsHTML
                 </select>
                 <input type="hidden" name="item" value="$escapedItem" >
-            </td>
-            <td>
-                <input type="submit" value="equip">
             </td>
         </form>
         </tr>
@@ -237,7 +235,7 @@ function DropItemFromInventory($mysql,$itemStr){
       if ($i === (array)$itemStr) {
           $foundItem = $i;
           unset($playerInvDecoded[$key]); // Remove the item from the array
-          echo "Removed item from Inventory<br>";
+          //echo "Removed item from Inventory<br>";
           break; // Stop searching once found
       }
     }
@@ -255,3 +253,29 @@ function DropItemFromInventory($mysql,$itemStr){
     mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
   
   }
+
+function AddItemToInventory($mysql, $itemStr){
+    $newItemObj=json_decode($itemStr);
+    //get current inventory
+    $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
+    $playerInvItemsObject=json_decode($playerInv['items']);
+
+    //if inventory is at capacity
+    if (sizeof((array)$playerInvItemsObject) >= $playerInv['capacity']) {
+      echo "Your inventory is full.";
+      
+      return;
+    }
+    if($playerInv == NULL){
+      $playerInv='{}';
+    }
+    //Get full player items as object
+    $playerInvItemsObject = json_decode($playerInv['items'], true);
+    array_push($playerInvItemsObject, $newItemObj);
+    $playerInvJson = json_encode($playerInvItemsObject);
+    //update JSON in DB
+    //$updatePlayerInvQuery = mysqli_query($mysql,"UPDATE `inventory` SET `items`=`items`+'".$newItemJson."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    $updateQuery = "UPDATE `inventory` SET `items` = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
+    mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
+}

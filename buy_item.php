@@ -21,27 +21,7 @@ if(!isset($_SESSION['uid'])){
     }
 
     //Add to inventory
-    //get current inventory
-    $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-    $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
-    $playerInvDecoded=json_decode($playerInv['items']);
-
-    //if inventory is at capacity
-    if (sizeof((array)$playerInvDecoded) >= $inventory['capacity']) {
-      echo "Your inventory is full.";
-      
-      return;
-    }
-    if($playerInv == NULL){
-      $playerInv='{}';
-    }
-    $playerInvDecoded = json_decode($playerInv['items'], true);
-    array_push($playerInvDecoded, $newItem);
-    $playerInvJson = json_encode($playerInvDecoded);
-    //update JSON in DB
-    //$updatePlayerInvQuery = mysqli_query($mysql,"UPDATE `inventory` SET `items`=`items`+'".$newItemJson."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-    $updateQuery = "UPDATE `inventory` SET `items` = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
-    mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
+    AddItemToInventory($mysql,json_encode($newItem));
 
   //Subtract cost of item
   $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$newItem['price']."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));

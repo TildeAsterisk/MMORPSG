@@ -32,11 +32,15 @@ if(!isset($_SESSION['uid'])){
     
     $currentlyEquipped = $playerInvDecoded;
     //remove item from array
-    $playerInvDecoded = [];
+    $playerInvDecoded = new stdClass();
 
     $playerInvJson = json_encode($playerInvDecoded);
     //update JSON in DB
     //Shouls add item to inventory
+    $newItem=json_decode($_POST['item']);
+    AddItemToInventory($mysql,$_POST['item']);
+
+
     $updateQuery = "UPDATE `inventory` SET $itemType = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
     mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
 
