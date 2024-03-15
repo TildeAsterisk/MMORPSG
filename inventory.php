@@ -18,61 +18,27 @@ if(!isset($_SESSION['uid'])){
         'legs'      =>  $playerInv['legs'],
         'feet'      =>  $playerInv['feet'],
     ];
-    ?>
-
-    <center><h2>Equipment:</h2></center>
-    <br />
-    <?php
     //Generate Equipment Display Screen
-    /*
-    var_dump($playerEquipmentDecoded['feet']);
-    echo "Head:  {$playerEquipmentDecoded['head']}<br>";
-    echo "Torso: {$playerEquipmentDecoded['torso']}<br>";
-    echo "Legs:  {$playerEquipmentDecoded['legs']}<br>";
-    echo "Feet:  {$playerEquipmentDecoded['feet']}<br>";
-    */
     $playerEquipmentDecoded['weapon']=json_decode($playerEquipmentDecoded['weapon']??'{}');
     $playerEquipmentDecoded['head']=json_decode($playerEquipmentDecoded['head']??'{}');
     $playerEquipmentDecoded['torso']=json_decode($playerEquipmentDecoded['torso']??'{}');
     $playerEquipmentDecoded['legs']=json_decode($playerEquipmentDecoded['legs']??'{}');
     $playerEquipmentDecoded['feet']=json_decode($playerEquipmentDecoded['feet']??'{}');
-    echo "<center><table id='inventoryTable'>";
-    foreach ($playerEquipmentDecoded as $key => $item) {
-        $itemExists = ($item->name ?? null);
-        if(!$itemExists){continue;}
-
-        $itemEncoded=json_encode($item);
-        $escapedItem = htmlspecialchars($itemEncoded, ENT_QUOTES, 'UTF-8');
-        // Define the item template
-        $item_template = <<<EOD
-        <tr>
-            <td><b>{$item->name}</b></td>
-            <td>{$item->attack}$attack_symbol</td>
-            <td>{$item->defense}$defense_symbol</td>
-            <td rowspan='2'>{$item->price}$currency_symbol</td>
-            <td rowspan='2'>
-                <form action="" method="post">
-                    <input style="width:100%;" type="submit" name="unequip" value="Unequip" />
-                    <input type="hidden" name="item" value="$escapedItem" >
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td colspan='3'><i>{$item->description}</i></td>
-        </tr>
-        <tr>
-            <td colspan='5'><hr></td>
-        </tr>
-        EOD;
-        
-        echo $item_template;                
-    }
-    echo "</table></center>";
-    
-    
     ?>
 
-
+    <center><h2>Equipment:</h2></center>
+    <center>
+    <table style='width:100%;background-color:rgba(0, 0, 0, 0.1);'>
+        <?php 
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['head'], EQUIPMENT_HEAD);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['torso'],EQUIPMENT_TORSO);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['legs'], EQUIPMENT_LEGS);
+        echo GenerateEquipmentSlotHTML($playerEquipmentDecoded['feet'], EQUIPMENT_FEET);
+        ?>
+    </table>
+    </center>
+    <br>
+    <br>
     <center><h2>Inventory</h2></center>
     <br />
 

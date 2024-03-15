@@ -149,5 +149,59 @@ function GenerateRandomEnemy($stats,$inventory){
     return $stats;
 }
 
+define("EQUIPMENT_HEAD",  "Head Gear");
+define("EQUIPMENT_TORSO", "Gear");
+define("EQUIPMENT_LEGS",  "Bottoms");
+define("EQUIPMENT_FEET",  "Footwear");
+function GenerateEquipmentSlotHTML($item, $equipmentType){
+    $itemEncoded=json_encode($item) ?? '{}';
+    $escapedItem = htmlspecialchars($itemEncoded, ENT_QUOTES, 'UTF-8');
+
+    if(!empty((array)$item)){
+        //var_dump($item);
+        $item_template = <<<EOD
+        <tr>
+            <td><b>{$item->name}</b></td>
+            <td>{$item->attack}&#9876;</td>
+            <td>{$item->defense}<b>&#128737;</b></td>
+            <td rowspan='2'>{$item->price}&#164;</td>
+            <td rowspan='2'>
+                <form action="unequip_item.php" method="post">
+                    <input style="width:100%;" type="submit" name="unequip" value="Unequip" />
+                    <input type="hidden" name="item" value="$escapedItem" >
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='3'><i>{$item->description}</i></td>
+        </tr>
+        <tr>
+            <td colspan='5'><hr></td>
+        </tr>
+        EOD;
+        return $item_template;
+    }
+
+    $emptySlotHTML=<<<EOD
+    <tr>
+            <td><b>{$equipmentType}</b></td>
+            <td colspan='4'>
+                <form action="equip_item" method="post">
+                    <select name="equipmentSelection" style="width:100%;">
+                        <option value="1">Aghjf Hat</option>
+                        <option value="2">Helmet of hjksdfg</option>
+                        <option value="3">Hood of hjshfj</option>
+                    </select>
+                    <!--input type="submit" name="equip" value="equip" /-->
+                    <input type="hidden" name="item" value="$escapedItem" >
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='5'><hr></td>
+        </tr>
+    EOD;
+    return $emptySlotHTML;
+}
 
 
