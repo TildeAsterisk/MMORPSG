@@ -49,7 +49,7 @@ if(!isset($_SESSION['uid'])){
 
 
     echo "You have equipped ".$newItemDecoded->name.".<br>";
-    echo "<center><a href='inventory.php'><button>Back to Inventory.</button></a></center><br>";
+    echo "<center><a href='character_sheet.php'><button>Back to Inventory.</button></a></center><br>";
     include("update_stats.php");
     
 

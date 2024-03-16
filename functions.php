@@ -68,10 +68,15 @@ function UpdateGlobalRankingStats($mysql){
         $i++;
     }
 }
-function GenerateRandomItem() {
+function GenerateRandomItem($itemType = null) {
     //Select random item type
     $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
-    $randomItemType = $itemTypes[array_rand($itemTypes)];
+    if($itemType == null){
+        $randomItemType = $itemTypes[array_rand($itemTypes)];
+    }
+    else{
+        $randomItemType = $itemType;
+    }
 
     $adjectives = ["Fierce", "Sinister", "Vengeful", "Dreadful", "Malevolent","Fancy", "Sinister", "Vivacious", "Quirky", "Radiant", "Melancholic", "Surreal", "Zesty", "Ethereal", "Whimsical", "Resilient", "Inquisitive", "Serene", "Luminous", "Mysterious", "Exuberant", "Gloomy", "Captivating", "Dynamic", "Harmonious", "Eloquent", "Jubilant", "Nebulous", "Enchanting", "Audacious", "Tranquil", "Pensive", "Effervescent", "Candid", "Ephemeral", "Euphoric", "Sardonic", "Bewitched", "Placid", "Vibrant", "Tenacious", "Spirited", "Elusive", "Solemn", "Furtive", "Lively", "Enigmatic", "Soothing", "Zealous", "Wistful", "Chimerical", "Incandescent"];
     $materials = ["Iron","Wood","Bronze","Gold","Steel","Stone", "Crystal", "Serpent's Fang","Ivory","Silk","Leather","Cloth","Iron","Wood","Bronze","Gold","Steel","Stone","Crystal","Serpent’s Fang","Ivory","Silk","Leather","Cloth","Obsidian","Mithril","Adamantium","Diamond","Emerald","Ruby","Sapphire","Topaz","Amber","Pearl","Quartz","Velvet","Velvet","Linen","Wool","Fur","Dragonhide","Titanium","Platinum","Obsidian","Bone","Copper","Silver","Plastic","Rubber","Carbon Fiber","Kevlar","Graphene","Scale","Fabric","Alloy","Diamond","Hide","Essence"];
@@ -196,7 +201,7 @@ function GenerateRandomEnemy($stats,$inventory){
         'defense'   => $stats['defense'] ?? 10,
         'currency'  => $stats['currency'] ?? 10,
         'equipment' => [
-            'weapon'    => $inventory['weapon'] ?? GenerateRandomitem()[0],
+            'weapon'    => $inventory['weapon'] ?? GenerateRandomitem(EQUIPMENT_WEAPON)[0],
             'head'      => $inventory['head'] ??  GenerateRandomitem()[0],
             'torso'     => $inventory['torso'] ??  GenerateRandomitem()[0],
             'legs'      => $inventory['legs'] ??  GenerateRandomitem()[0],
@@ -319,7 +324,7 @@ function AddItemToInventory($mysql, $itemStr){
     if (sizeof((array)$playerInvItemsObject) >= $playerInv['capacity']) {
       echo "Your inventory is full.";
       
-      return;
+      return false;
     }
     if($playerInv == NULL){
       $playerInv='{}';
@@ -332,4 +337,5 @@ function AddItemToInventory($mysql, $itemStr){
     //$updatePlayerInvQuery = mysqli_query($mysql,"UPDATE `inventory` SET `items`=`items`+'".$newItemJson."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $updateQuery = "UPDATE `inventory` SET `items` = '$playerInvJson' WHERE `id` = '".$_SESSION['uid']."'";
     mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
+    return true;
 }

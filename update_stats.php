@@ -1,5 +1,6 @@
 <?php
 //Get player stats
+// Default Stats
 $attack = 5;
 $defense = 5;
 

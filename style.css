@@ -98,12 +98,6 @@ width: 25%;
     justify-content: space-between;
 }
 
-#miniProfile {
-    float: right;
-    background-color: #0000000f;
-    padding:5px;
-}
-
 
 #jobsTable ,#jobsTable td,
 #jobsTable th{

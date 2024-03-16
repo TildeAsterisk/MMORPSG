@@ -23,7 +23,7 @@ else{
 
 
 
-echo "<br><a href='inventory.php'><button>See Inventory.</button></a>";
+echo "<br><a href='character_sheet.php'><button>See Inventory.</button></a>";
 
 include("footer.php");
 ?>

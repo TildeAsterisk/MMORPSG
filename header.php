@@ -30,18 +30,6 @@ include_once("connection.php");
         ?>
 
           <h1 style="padding:0;margin:0;">~* MMO RPG</h1>
-          
-          <!--a href="profile.php"><div id="miniProfile">
-            <?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?>
-            <?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?>
-            <?php echo "<b>".$stats['energy']."</b>".$energy_symbol; ?>
-            <?php echo "<b>".$stats['experience']."</b>".$experience_symbol; ?><br>
-            
-            <div style="background-color:grey;margin-top:5px;">
-              <div style="background-color:lightgreen;height:12px;width:20%"></div>
-            </div>
-
-          </div></a-->
 
           <div id="headerProfile">
             <table style="width:100%;">
@@ -49,7 +37,7 @@ include_once("connection.php");
                 <td><?php echo $currency_symbol ?> Money</td>
                 <td><?php echo $energy_symbol ?> Energy</td>
                 <td><?php echo $level_symbol ?> Experience</td>
-                <td><a href="profile.php"><?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?></a></td>
+                <td><a href="character_sheet.php"><?php echo "<center><b><i><u>".$user['username']."</u></i></b></center>"; ?></a></td>
               </tr>
               <tr>
                 <td><?php echo "<b>".$stats['currency']."</b>".$currency_symbol; ?></td>
@@ -67,9 +55,9 @@ include_once("connection.php");
           <hr>
           <div id="navbar">
             <a href="main.php">Home</a>
+            <a href="character_sheet.php">Character Sheet</a>
             <!--a href="profile.php">Profile</a-->
             <a href="jobs.php">Jobs</a>
-            <a href="inventory.php">Inventory</a>
             <a href="shop.php">Market</a>
             <a href="rankings.php">Ranking</a>
             <a href="logout.php">Log-Out</a>

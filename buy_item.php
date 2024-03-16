@@ -21,17 +21,18 @@ if(!isset($_SESSION['uid'])){
     }
 
     //Add to inventory
-    AddItemToInventory($mysql,json_encode($newItem));
+    $addedToInv = AddItemToInventory($mysql,json_encode($newItem));
+    if($addedToInv){
+      //Subtract cost of item
+      $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$newItem['price']."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
-  //Subtract cost of item
-  $energycostquery = mysqli_query($mysql,"UPDATE `stats` SET `currency`=`currency`-'".$newItem['price']."' WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
 
 
-
-    echo "You have purchased ".$newItem['name'].".<br>";
-    echo "<a href='shop.php'><button>Back to Market.</button></a><br>";
-    echo "<a href='inventory.php'><button>See in Inventory.</button></a>";
-    include("update_stats.php");
+      echo "You have purchased ".$newItem['name'].".<br>";
+      echo "<a href='shop.php'><button>Back to Market.</button></a><br>";
+      echo "<a href='character_sheet.php'><button>See in Inventory.</button></a>";
+      include("update_stats.php");
+    }
 
   }
   else{
