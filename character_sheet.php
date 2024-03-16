@@ -4,7 +4,11 @@ include("header.php");
 if(!isset($_SESSION['uid'])){
     echo "You must be logged in to view this page!";
 }else{
-    //STATS DISPLAY
+  //Character Graphics
+  $characterASCII = <<<EOD
+  EOD;
+
+  //STATS DISPLAY
     ?>
   <center><div class="tooltip" style="border-bottom:none;">
       <?php 
@@ -12,7 +16,7 @@ if(!isset($_SESSION['uid'])){
       echo ucfirst($user['username']);
       echo "</i></h1>";
       echo "<h3 style='margin:0;padding:0;'>{$stats['attack']}{$attack_symbol} {$stats['defense']}{$defense_symbol} {$leaderboard['overall']}{$overall_symbol}</h3>" ?><hr>
-    <span class="tooltiptext"><?php echo "$overall_symbol = {$attack_symbol}+{$defense_symbol}";?></span></div>
+    <span class="tooltiptext"><?php echo "Power$overall_symbol = ATK{$attack_symbol}+DEF{$defense_symbol}";?></span></div>
   </center>
   <?php
 

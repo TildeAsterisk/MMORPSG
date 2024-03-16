@@ -11,7 +11,7 @@ else{
   //Player is logged in, show main page
   ?>
 
-<!--center><h1>Legend</h1></center-->
+<center><h1>Control Center</h1></center>
 * Message Inbox<br>
 * Player Logs<br>
 * Inventory (Compact)<br>
