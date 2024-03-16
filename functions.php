@@ -312,6 +312,7 @@ function AddItemToInventory($mysql, $itemStr){
     //get current inventory
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
+    $playerInv['items'] = $playerInv['items'] ?? '{}';
     $playerInvItemsObject=json_decode($playerInv['items']);
 
     //if inventory is at capacity

@@ -91,8 +91,10 @@ if(!isset($_SESSION['uid'])){
   $values = array_values($playerEquipment);
   $randomPlayerEquipment = $values[array_rand($values)];
   $randomPlayerEquipmentTxt = json_decode($randomPlayerEquipment)->name ?? "bare skin";
+  //get Enemy weapon
+  //var_dump(json_decode($newRandomEnemy['equipment']['weapon'])->name);
   //Enemies turn
-  $weaponTxt = $newRandomEnemy['equipment']['weapon']->name ?? "bare hands";
+  $weaponTxt = json_decode($newRandomEnemy['equipment']['weapon'])->name ?? "bare hands";
   echo "<hr>";
   echo "<b>{$newRandomEnemy['name']}</b> prepares to hit you with their <b>{$weaponTxt}</b>.<br>";
   //echo "[Calculate the chance to hit...]<br>";

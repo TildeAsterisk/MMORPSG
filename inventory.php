@@ -7,7 +7,9 @@ if(!isset($_SESSION['uid'])){
     $getPlayerInvQuery = mysqli_query($mysql,"SELECT * FROM `inventory` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
     $playerInv = mysqli_fetch_assoc($getPlayerInvQuery);
     if($playerInv['items'] == NULL){
-        echo "Your inventory is empty.<br>";
+        echo "<center><h1>Your inventory is empty.</h1><br>";
+        echo "Buy some items in the market.</center>";
+        //$playerInv['items'] = '{}';
         return;
     }
     $playerInvDecoded = json_decode($playerInv['items'], true);
