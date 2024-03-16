@@ -56,6 +56,7 @@ if(!isset($_SESSION['uid'])){
   
   //Generate the battle 
   $weaponTxt = $inventory['weapon']??"bare hands";
+  //$eWeaponTxt = $inventory['weapon']??"bare hands";
 
   //YOUR TURN
   $eDamageDealt = $stats['attack']-$enemy_stats['defense'];
@@ -66,11 +67,13 @@ if(!isset($_SESSION['uid'])){
   $values = array_values($newRandomEnemy['equipment']);
   $randomEnemyEquipment = $values[array_rand($values)];
   $randomEnemyEquipmentObj = json_decode($randomEnemyEquipment);
+  $randEnemyEquipName=$randomEnemyEquipmentObj->name ?? "bare skin";
+
   echo "<hr>";
   echo "You prepare to hit <b>{$newRandomEnemy['name']}</b> with your <b>{$weaponTxt}</b>.<br>";
   //echo "[Calculate the chance to hit...]<br>";
-  echo "Your hit lands on <b>{$newRandomEnemy['name']}'s {$randomEnemyEquipmentObj->name}</b> with a force of <b>{$stats['attack']}</b>.<br>";
-  echo "Their <b>{$randomEnemyEquipmentObj->name}</b> soaked up <b>{$eBlockedPercentage}%</b> of the damage.<br>";
+  echo "Your hit lands on <b>{$newRandomEnemy['name']}</b> with a force of <b>{$stats['attack']}</b>.<br>";
+  echo "Their <b>{$randEnemyEquipName}</b> soaked up <b>{$eBlockedPercentage}%</b> of the damage.<br>";
   echo "You dealt <b>{$eDamageDealt}</b> damage to the {$newRandomEnemy['name']}.<br>";
 
   // ENEMIES TURN
@@ -93,7 +96,7 @@ if(!isset($_SESSION['uid'])){
   echo "<hr>";
   echo "<b>{$newRandomEnemy['name']}</b> prepares to hit you with their <b>{$weaponTxt}</b>.<br>";
   //echo "[Calculate the chance to hit...]<br>";
-  echo "<b>{$newRandomEnemy['name']}</b> strikes your <b>{$randomPlayerEquipmentTxt}</b> with a force of <b>{$stats['attack']}</b>.<br>";
+  echo "<b>{$newRandomEnemy['name']}</b> strikes you with a force of <b>{$stats['attack']}</b>.<br>";
   echo "Your <b>{$randomPlayerEquipmentTxt}</b> soaked up <b>{$pBlockedPercentage}%</b> of the damage.<br>";
   echo "<b>{$newRandomEnemy['name']}</b> dealt <b>{$eDamageDealt}</b> damage to you.<br>";
   ECHO "<hr>";

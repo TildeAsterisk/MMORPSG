@@ -69,29 +69,81 @@ function UpdateGlobalRankingStats($mysql){
     }
 }
 function GenerateRandomItem() {
-    // Random item name and description
-    $itemNames = ["Sword of Valor", "Enchanted Amulet", "Dragonhide Boots", "Crystal Wand"];
-    $itemDescriptions = [
-        "A legendary sword forged by ancient blacksmiths.",
-        "A mystical amulet that grants its wearer enhanced abilities.",
-        "Sturdy boots made from the hide of a fire-breathing dragon.",
-        "A magical wand that channels elemental energy."
+    //Select random item type
+    $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
+    $randomItemType = $itemTypes[array_rand($itemTypes)];
+
+    $adjectives = ["Fierce", "Sinister", "Vengeful", "Dreadful", "Malevolent","Fancy", "Sinister", "Vivacious", "Quirky", "Radiant", "Melancholic", "Surreal", "Zesty", "Ethereal", "Whimsical", "Resilient", "Inquisitive", "Serene", "Luminous", "Mysterious", "Exuberant", "Gloomy", "Captivating", "Dynamic", "Harmonious", "Eloquent", "Jubilant", "Nebulous", "Enchanting", "Audacious", "Tranquil", "Pensive", "Effervescent", "Candid", "Ephemeral", "Euphoric", "Sardonic", "Bewitched", "Placid", "Vibrant", "Tenacious", "Spirited", "Elusive", "Solemn", "Furtive", "Lively", "Enigmatic", "Soothing", "Zealous", "Wistful", "Chimerical", "Incandescent"];
+    $materials = ["Iron","Wood","Bronze","Gold","Steel","Stone", "Crystal", "Serpent's Fang","Ivory","Silk","Leather","Cloth","Iron","Wood","Bronze","Gold","Steel","Stone","Crystal","Serpent’s Fang","Ivory","Silk","Leather","Cloth","Obsidian","Mithril","Adamantium","Diamond","Emerald","Ruby","Sapphire","Topaz","Amber","Pearl","Quartz","Velvet","Velvet","Linen","Wool","Fur","Dragonhide","Titanium","Platinum","Obsidian","Bone","Copper","Silver","Plastic","Rubber","Carbon Fiber","Kevlar","Graphene","Scale","Fabric","Alloy","Diamond","Hide","Essence"];
+    
+    $equipmentNames = [
+        EQUIPMENT_WEAPON    => ["Blade","Axe","Dagger","Staff","Bow","Sword","Mace","Spear","Wand","Crossbow","Chakram","Sickle","Whip","Shuriken","Boomerang","Sling","Harpoon","Cudgel","Halberd","Trident","Flail","Rapier","Morning Star","Warhammer","Javelin","Nunchaku","Scythe","Katar","Bolas","Kusarigama","Tessen","Chigiriki","Kama","Naginata","Tanto","Glaive","Khopesh","Estoc","Falchion","Claymore","Zweihander","Katana","Cutlass","Rondel","Tomahawk","War Fan","Quarterstaff","Sai","Kris"],
+        EQUIPMENT_HEAD      => ["hat","helm","cowboy hat","hood","mask","tiara","crown","cap","visor","headband","beanie","beret","bonnet","balaclava","coif","circlet","veil","turban","fez","tricorn","toque","miter","snood","visor","headdress","bandana","scarf","headscarf","headwrap","headpiece","diadem","coronet","tiara","wimple","chapeau","tam","bowler","top hat","fedora","sombrero","panama hat","boater","derby","pork pie hat","newsboy cap","flat cap","baseball cap","snapback","bucket hat","beanie","beret","visor","balaclava","cowl","hood","mask","veil","turban","scarf","headscarf","headwrap","headpiece","tiara","diadem","cap","helmet","coif","circlet","visor","headdress","bandana","snood","visor","headband","beanie","beret","bonnet","balaclava","coif","circlet","veil","turban","fez","tricorn","toque","miter","visor","headdress","bandana","scarf","headscarf","headwrap","headpiece","diadem","coronet","tiara","wimple","chapeau","tam","bowler","top hat","fedora","sombrero","panama hat","boater","derby","pork pie hat","newsboy cap","flat cap","baseball cap","snapback","bucket hat","beanie","beret","visor","balaclava","cowl","hood","mask","veil","turban","scarf","headscarf","headwrap","headpiece","tiara","diadem","cap","helmet","coif","circlet","visor","headdress","bandana","snood","visor","headband","beanie","beret","bonnet","balaclava","coif","circlet","veil","turban","fez","tricorn","toque","miter","visor","headdress","bandana","scarf","headscarf","headwrap","headpiece","diadem","coronet","tiara","wimple","chapeau","tam","bowler","top hat","fedora","sombrero","panama hat","boater","derby","pork pie hat","newsboy cap","flat cap","baseball cap","snapback","bucket hat","beanie","beret","visor","balaclava","cowl","hood","mask","veil","turban","scarf","headscarf","headwrap","headpiece","tiara","diadem","cap","helmet","coif","circlet","visor","headdress","bandana","snood","visor","headband","beanie","beret","bonnet","balaclava","coif","circlet","veil","turban","fez","tricorn","toque","miter","visor","headdress","bandana","scarf","headscarf","headwrap","headpiece","diadem","coronet","tiara","wimple","chapeau","tam","bowler","top hat","fedora","sombrero","panama hat","boater","derby","pork pie hat","newsboy cap","flat cap","baseball cap","snapback","bucket hat","beanie","beret","visor","balaclava","cowl","hood","mask","veil","turban","scarf","headscarf","headwrap","headpiece","tiara","diadem","cap","helmet","coif","circlet","visor","headdress","bandana","snood","visor","headband","beanie","beret","bonnet","balaclava","coif","circlet","veil","turban","fez","tricorn","toque","miter","visor","headdress","bandana","scarf","headscarf","headwrap","headpiece","diadem","coronet","tiara","wimple","chapeau","tam","bowler","top hat","fedora","sombrero","panama hat","boater","derby","pork pie hat","newsboy cap","flat cap","baseball cap","snapback","bucket hat","beanie","beret","visor","balaclava","cowl","hood","mask","veil","turban","scarf","headscarf","headwrap","headpiece","tiara","diadem","cap","helmet","coif","circlet","visor","headdress","bandana","snood","visor","headband","beanie","beret","bonnet","balaclava"],
+        EQUIPMENT_TORSO     => ["Shirt","Tunic","Vest","Chestplate","Breastplate","Hauberk","Cuirass","Tabard","Doublet","Jerkin","Gambeson","Leather Armor","Plate Mail","Chainmail","Scale Mail","Ringmail","Bulletproof Vest","Flak Jacket","Shoulder Pads","Pauldrons","Spaulders","Arm Bracers","Elbow Guards","Armored Gauntlets","Tassets","Faulds","Loincloth","Hip Guards","Thigh Plates","Greaves","Cuisses","Knee Guards","Shin Guards","Sabatons"],
+        EQUIPMENT_LEGS      => ["Greaves","Cuisses","Knee Guards","Shin Guards","Sabatons","Shorts","Pants","Leggings","Tights","Jeans","Cargo Pants","Joggers","Capris","Sweatpants","Overalls","Skirt","Kilt","Trousers","Chinos","Culottes","Harem Pants","Palazzo Pants","Bell-bottoms","Hot Pants","Bermuda Shorts","Board Shorts","Cycling Shorts","Track Pants","Snow Pants","Gaiters","Garters","Leg Warmers","Thigh-high Stockings","Knee-high Socks","Ankle Socks","Compression Socks"],
+        EQUIPMENT_FEET      => ["Boots","Shoes","Sandals","Slippers","Sneakers","High Heels","Steel-Toed Boots","Combat Boots","Hiking Boots","Work Boots","Snow Boots","Rain Boots","Flip-Flops","Moccasins","Espadrilles","Waders","Clogs","Loafers","Oxfords","Platform Shoes","Thigh-High Boots","Ankle Boots","Wellington Boots","Gaiters","Sabatons"]
     ];
+    
+    switch ($randomItemType){
+        case EQUIPMENT_WEAPON:
+            //random weapon names
+            $randomName = $equipmentNames[EQUIPMENT_WEAPON][array_rand($equipmentNames[EQUIPMENT_WEAPON])];
+            break;
+        case EQUIPMENT_HEAD:
+            $randomName = $equipmentNames[EQUIPMENT_HEAD][array_rand($equipmentNames[EQUIPMENT_HEAD])];
+            break;
+        case EQUIPMENT_TORSO:
+            //random weapon names
+            $randomName = $equipmentNames[EQUIPMENT_TORSO][array_rand($equipmentNames[EQUIPMENT_TORSO])];
+            break;
+        case EQUIPMENT_LEGS:
+            //random weapon names
+            $randomName = $equipmentNames[EQUIPMENT_LEGS][array_rand($equipmentNames[EQUIPMENT_LEGS])];
+            break;
+        case EQUIPMENT_FEET:
+            //random weapon names
+            $randomName = $equipmentNames[EQUIPMENT_FEET][array_rand($equipmentNames[EQUIPMENT_FEET])];
+            break;
+        default:
+            //unknown itemt ype
+            $randomName = "Non-Equipment Item";
+            break;
+    }
+
+    //Add Adjectives and descriptor to name
+    $randomAdjective = $adjectives[array_rand($adjectives)];
+    $randomMaterial = $materials[array_rand($materials)];
+    //Capitalize all
+    $randomAdjective = ucfirst($randomAdjective);
+    $randomMaterial  = ucfirst($randomMaterial);
+    $randomName      = ucfirst($randomName);
+    //Combine to make full item name
+    /*Combination examples:
+        - Enchanted Loafers of Obsidian
+        - Enchanted Obsidian Loafers
+    */
+    $fullNameCombos = ["$randomAdjective $randomName of $randomMaterial", "$randomAdjective $randomMaterial $randomName"];
+    $fullItemName = $fullNameCombos[array_rand($fullNameCombos)];
+
+    // Random item description
+    $itemDescriptions = [
+        //"A legendary $randomName forged by ancient blacksmiths.",
+        //"A $randomAdjective $randomName that grants its wearer enhanced abilities.",
+        "A $randomAdjective $randomName crafted out of $randomMaterial.<br><b>[$randomItemType]</b>",
+        "This $randomName is named the `$randomAdjective` by its creator who made out of $randomMaterial.<br><b>[$randomItemType]</b>",
+        "The $randomMaterial $randomName has a small written marking on it reading <i>`$randomAdjective`</i>.<br><b>[$randomItemType]</b>",
+        //"A $randomAdjective $randomName that channels elemental energy."
+    ];
+    // Randomly select an item description
+    $randomDescription = $itemDescriptions[array_rand($itemDescriptions)];
 
     // Random properties (attack, defense, and price)
     $attack = rand(5, 20);
     $defense = rand(5, 20);
     $price = rand(10, 200);
 
-    $itemTypes = [ /*null ,*/ EQUIPMENT_HEAD, EQUIPMENT_TORSO, EQUIPMENT_LEGS, EQUIPMENT_FEET];
 
-    // Randomly select an item name and description
-    $randomName = $itemNames[array_rand($itemNames)];
-    $randomDescription = $itemDescriptions[array_rand($itemDescriptions)];
-    $randomItemType = $itemTypes[array_rand($itemTypes)];
-
-
-    $randomNewItem="{'name':'{$randomName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}', 'itemType': '{$randomItemType}'}";
+    $randomNewItem="{'name':'{$fullItemName}', 'description': '{$randomDescription}', 'price': '{$price}', 'attack': '{$attack}', 'defense': '{$defense}', 'itemType': '{$randomItemType}'}";
     //Replace single quotes with double to allow for json decode
     $randomNewItem=str_replace("'",'"', $randomNewItem);
     //var_dump($randomNewItem);
@@ -101,7 +153,7 @@ function GenerateRandomItem() {
     $itemTemplate = <<<EOD
         <tr class="itemInShop">
             <td>
-                <b>$randomName</b><br>
+                <b>$fullItemName</b><br>
                 <i>$randomDescription</i>
             </td>
             <td>
@@ -112,7 +164,7 @@ function GenerateRandomItem() {
                 <form action="buy_item.php" method="post">
                     <input style="width:100%;" type="submit" name="buy" value="Buy!" />
                     <!-- Additional input fields -->
-                    <input type="hidden" name="name"        value="$randomName">
+                    <input type="hidden" name="name"        value="$fullItemName">
                     <input type="hidden" name="description" value="$randomDescription">
                     <input type="hidden" name="price"       value="$price">
                     <input type="hidden" name="attack"      value="$attack">
@@ -158,6 +210,7 @@ define("EQUIPMENT_HEAD",  "Head Gear");
 define("EQUIPMENT_TORSO", "Gear");
 define("EQUIPMENT_LEGS",  "Bottoms");
 define("EQUIPMENT_FEET",  "Footwear");
+define("EQUIPMENT_WEAPON",  "Weapon");
 function GenerateEquipmentSlotHTML($item, $equipmentType, $inventory){
     $itemEncoded=json_encode($item) ?? '{}';
     $escapedItem = htmlspecialchars($itemEncoded, ENT_QUOTES, 'UTF-8');

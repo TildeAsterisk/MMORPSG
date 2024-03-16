@@ -19,7 +19,7 @@ if(!isset($_SESSION['uid'])){
 
 
 //Display a number of randomly generated items
-for ($i = 0; $i <= 4; $i++) {
+for ($i = 0; $i <= 7; $i++) {
     echo GenerateRandomItem()[1];
 }
 
