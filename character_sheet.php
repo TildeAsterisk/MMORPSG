@@ -6,7 +6,24 @@ if(!isset($_SESSION['uid'])){
 }else{
   //Character Graphics
   $characterASCII = <<<EOD
-  EOD;
+         o   o                                              
+          )-(                                               
+         (O O)                                              
+          \=/                                               
+       .---"---.                                             
+      //\     /\\                                            
+     //  \   /  \\                                             
+   _//   |   |   \\_                                    
+  =./    /   \   \.=                                        
+        (-----)                                             
+        ||   ||                                              
+        ||   || 
+        (|   |)                                              
+        ||   ||                                                                                           
+     __ ||   ||__                                            
+    `---"    "---'                                                                                   
+  EOD; //made by hjw `97
+  //echo "<pre>$characterASCII</pre>";
 
   //STATS DISPLAY
     ?>

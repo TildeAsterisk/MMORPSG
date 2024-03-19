@@ -12,9 +12,17 @@ else{
   ?>
 
 <center><h1>Control Center</h1></center>
-* Message Inbox<br>
-* Player Logs<br>
-* Inventory (Compact)<br>
+<pre>
+Army Units:
+* Train Units
+* Send units to fight others
+* Play battle simulation
+
+To Do:
+* Message Inbox
+* Player Logs
+* Inventory (Compact)
+</pre>
 
   <?php
 }

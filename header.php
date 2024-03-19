@@ -54,6 +54,7 @@ include_once("connection.php");
 
           <hr>
           <div id="navbar">
+            Home
             <!--a href="ship.php">Ship</a-->
             <a href="character_sheet.php">Character Sheet</a>
             <!--a href="profile.php">Profile</a-->
