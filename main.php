@@ -10,21 +10,25 @@ if(!isset($_SESSION['uid'])){
 else{
   //Player is logged in, show main page
   ?>
-
 <center><h1>Control Center</h1></center>
 <pre>
-Army Units:
-* Train Units
-* Send units to fight others
-* Play battle simulation
-
-To Do:
-* Message Inbox
-* Player Logs
-* Inventory (Compact)
+Settlements:
+  Stats: Location, Conditions, Population, Food, Resources
+  - Activities:
+    * List of current jobs (foragers, builders, attackers)
+  - Expeditions
 </pre>
-
   <?php
+  include("settlement.php");
+  //Init Settlement Obj
+  $pSettlement = new Settlement();
+  $pSettlement->InitSettlement();
+  /*echo "<hr>Settlement Initialized.<br>";
+  echo "\$data: ",var_dump($pSettlement->data),"<hr>";
+  */
+  
+  
+
 }
 //include("update_stats.php");
 include("footer.php");
