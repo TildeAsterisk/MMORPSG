@@ -196,9 +196,11 @@ function GenerateRandomEnemyName() {
 
 function GenerateRandomEnemy($stats,$inventory){
     $stats = [  // Associative Array / Dictionary
-        'name'    => $stats['name'] ?? GenerateRandomEnemyName(),
+        'name'      => $stats['name'] ?? GenerateRandomEnemyName(),
+        'health'    => 100, //default HP
         'attack'    => $stats['attack'] ?? 10,
         'defense'   => $stats['defense'] ?? 10,
+        'speed'     => 1,
         'currency'  => $stats['currency'] ?? 10,
         'equipment' => [
             'weapon'    => $inventory['weapon'] ?? GenerateRandomitem(EQUIPMENT_WEAPON)[0],
@@ -339,3 +341,18 @@ function AddItemToInventory($mysql, $itemStr){
     mysqli_query($mysql, $updateQuery) or die(mysqli_error($mysql));
     return true;
 }
+
+/*
+function UseAvailableCharacterSkill($statsObj,$targetStatsObj){
+    $skills = $statsObj['skills'];
+    if ($skills == null){
+        echo "{$statsObj['id']} doesn't have any skills.";
+        return null;}
+    foreach ($skills as $key => $value) {
+        if($value['cooldown']==0){
+            //if skill cooldown is 0 then use skill
+            echo "Character {$statsObj['id']} has casted {$value['name']} at {$targetStatsObj['id']}";
+        }
+    }
+}
+*/

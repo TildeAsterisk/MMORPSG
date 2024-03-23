@@ -58,50 +58,68 @@ if(!isset($_SESSION['uid'])){
   $weaponTxt = $inventory['weapon']??"bare hands";
   //$eWeaponTxt = $inventory['weapon']??"bare hands";
 
-  //YOUR TURN
-  $eDamageDealt = $stats['attack']-$enemy_stats['defense'];
-  if($eDamageDealt < 0){$eDamageDealt=0;}
-  $eDamageBlocked = $stats['attack'] - $eDamageDealt;
-  $eBlockedPercentage=round(($eDamageBlocked/$stats['attack'])*100);
-  //enemy equipment
-  $values = array_values($newRandomEnemy['equipment']);
-  $randomEnemyEquipment = $values[array_rand($values)];
-  $randomEnemyEquipmentObj = json_decode($randomEnemyEquipment);
-  $randEnemyEquipName=$randomEnemyEquipmentObj->name ?? "bare skin";
+  //COMABAT UPDATE
+  //PLAY ANIMATED BATTLE IN CANVAS ON JAVASCRIPT
+  $pHealth = $stats['health'];
+  $eHealth = $newRandomEnemy['health'];
+  $fightTurnCount = 0;
 
-  echo "<hr>";
-  echo "You prepare to hit <b>{$newRandomEnemy['name']}</b> with your <b>{$weaponTxt}</b>.<br>";
-  //echo "[Calculate the chance to hit...]<br>";
-  echo "Your hit lands on <b>{$newRandomEnemy['name']}</b> with a force of <b>{$stats['attack']}</b>.<br>";
-  echo "Their <b>{$randEnemyEquipName}</b> soaked up <b>{$eBlockedPercentage}%</b> of the damage.<br>";
-  echo "You dealt <b>{$eDamageDealt}</b> damage to the {$newRandomEnemy['name']}.<br>";
+  //While both players health is above 0 and number of turns is less than 42
+  while($pHealth > 0 && $eHealth > 0 && $fightTurnCount < 10){
+    $fightTurnCount+=1;
+    //YOUR TURN
+    $pDamageDealt = $stats['attack']-$enemy_stats['defense'];
+    if($pDamageDealt < 0){$pDamageDealt=0;}
+    $eDamageBlocked = $enemy_stats['defense'] - $stats['attack'];
+    if ($eDamageBlocked<0){$eDamageBlocked=$stats['attack'];}
+    $eBlockedPercentage=round(($eDamageBlocked/$stats['attack'])*100);
+    //enemy equipment
+    $values = array_values($newRandomEnemy['equipment']);
+    $randomEnemyEquipment = $values[array_rand($values)];
+    $randomEnemyEquipmentObj = json_decode($randomEnemyEquipment);
+    $randEnemyEquipName=$randomEnemyEquipmentObj->name ?? "bare skin";
+    //calculate damage
+    $eHealth-=$pDamageDealt;
 
-  // ENEMIES TURN
-  $eDamageDealt   = $stats['attack']-$enemy_stats['defense'];
-  if($eDamageDealt < 0){$eDamageDealt=0;}
-  $pDamageBlocked = $stats['attack'] - $eDamageDealt;
-  $pBlockedPercentage=round(($pDamageBlocked/$stats['attack'])*100);
-  $playerEquipment=[
-    'weapon'    => $inventory['weapon'] ??  '{}',
-    'head'      => $inventory['head'] ??    '{}',
-    'torso'     => $inventory['torso'] ??   '{}',
-    'legs'      => $inventory['legs'] ??    '{}',
-    'feet'      => $inventory['feet'] ??    '{}'
-  ];
-  $values = array_values($playerEquipment);
-  $randomPlayerEquipment = $values[array_rand($values)];
-  $randomPlayerEquipmentTxt = json_decode($randomPlayerEquipment)->name ?? "bare skin";
-  //get Enemy weapon
-  //var_dump(json_decode($newRandomEnemy['equipment']['weapon'])->name);
-  //Enemies turn
-  $weaponTxt = json_decode($newRandomEnemy['equipment']['weapon'])->name ?? "bare hands";
-  echo "<hr>";
-  echo "<b>{$newRandomEnemy['name']}</b> prepares to hit you with their <b>{$weaponTxt}</b>.<br>";
-  //echo "[Calculate the chance to hit...]<br>";
-  echo "<b>{$newRandomEnemy['name']}</b> strikes you with a force of <b>{$stats['attack']}</b>.<br>";
-  echo "Your <b>{$randomPlayerEquipmentTxt}</b> soaked up <b>{$pBlockedPercentage}%</b> of the damage.<br>";
-  echo "<b>{$newRandomEnemy['name']}</b> dealt <b>{$eDamageDealt}</b> damage to you.<br>";
-  ECHO "<hr>";
+    echo "<hr>";
+    echo "You prepare to hit <b>{$newRandomEnemy['name']}</b> with your <b>{$weaponTxt}</b>.<br>";
+    //echo "[Calculate the chance to hit...]<br>";
+    echo "Your hit lands on <b>{$newRandomEnemy['name']}</b> with a force of <b>{$stats['attack']}</b>.<br>";
+    echo "Their <b>{$randEnemyEquipName}</b> soaked up <b>{$eBlockedPercentage}%</b> of the damage.<br>";
+    echo "You dealt <b>{$pDamageDealt}</b> damage to the {$newRandomEnemy['name']}.<br>";
+
+    // ENEMIES TURN
+    $eDamageDealt   = $enemy_stats['attack']-$stats['defense'];
+    if($eDamageDealt < 0){$eDamageDealt=0;}
+    $pDamageBlocked = $stats['attack'] - $eDamageDealt;
+    $pBlockedPercentage=round(($pDamageBlocked/$stats['attack'])*100);
+    $playerEquipment=[
+      'weapon'    => $inventory['weapon'] ??  '{}',
+      'head'      => $inventory['head'] ??    '{}',
+      'torso'     => $inventory['torso'] ??   '{}',
+      'legs'      => $inventory['legs'] ??    '{}',
+      'feet'      => $inventory['feet'] ??    '{}'
+    ];
+    $values = array_values($playerEquipment);
+    $randomPlayerEquipment = $values[array_rand($values)];
+    $randomPlayerEquipmentTxt = json_decode($randomPlayerEquipment)->name ?? "bare skin";
+    //get Enemy weapon
+    //var_dump(json_decode($newRandomEnemy['equipment']['weapon'])->name);
+    //Calculate damage
+    $pHealth-=$eDamageDealt;
+    //Enemies turn
+    $weaponTxt = json_decode($newRandomEnemy['equipment']['weapon'])->name ?? "bare hands";
+    echo "<hr>";
+    echo "<b>{$newRandomEnemy['name']}</b> prepares to hit you with their <b>{$weaponTxt}</b>.<br>";
+    //echo "[Calculate the chance to hit...]<br>";
+    echo "<b>{$newRandomEnemy['name']}</b> strikes you with a force of <b>{$stats['attack']}</b>.<br>";
+    echo "Your <b>{$randomPlayerEquipmentTxt}</b> soaked up <b>{$pBlockedPercentage}%</b> of the damage.<br>";
+    echo "<b>{$newRandomEnemy['name']}</b> dealt <b>{$eDamageDealt}</b> damage to you.<br>";
+    echo "Your HP: {$pHealth}, Enemy HP: {$eHealth}<br>";
+    //ECHO "<hr>";
+  }
+
+  
 
   if($stats['attack'] > $enemy_stats['defense']){
       $ratio = ($stats['attack'] - $enemy_stats['defense'])/$stats['attack'] * $turns;
