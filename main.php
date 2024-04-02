@@ -11,8 +11,20 @@ if(!isset($_SESSION['uid'])){
 else{
   //Player is logged in, show main page
   ?>
-<center><h1>Control Center</h1></center>
+  <canvas id="myCanvas"></canvas>
+  <style>#myCanvas {margin:-8px;} #content {width:100%;}</style>
+  <script>
+    var canvas = document.getElementById("myCanvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight*0.8;
+    canvas.style.backgroundColor = "brown";
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(10, 10, 250, 250);
+  </script>
   <?php
+  /*
   //Find settlement insql db
   $getPlayerStlmntQuery = mysqli_query($mysql,"SELECT * FROM `settlement` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
   $pSettlement = [ 'data' => (object)mysqli_fetch_assoc($getPlayerStlmntQuery)];
@@ -21,17 +33,13 @@ else{
     $pSettlement = new Settlement();
     $pSettlement->InitSettlement($mysql);
   }
-  //var_dump($pSettlement['data']);
-  /*echo "<hr>Settlement Initialized.<br>";
-  echo "\$data: ",var_dump($pSettlement->data),"<hr>";
-  */
-  //$pSettlement->UpdateSettlement();
   echo "<center><b>Total Population: {$pSettlement['data']->population}</b><br>";
   echo SettlementJobBoardHTMl($pSettlement),"<br>";
   //display income for food, resources
   echo "Income:<br>+1 {$food_symbol}/day<br>+1 {$materials_symbol}/day<br>";
   echo "<br>Buildings:";
   echo "</center>";
+  */
 
 }
 //include("update_stats.php");

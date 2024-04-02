@@ -5,6 +5,7 @@ const SETTLEMENT_TAG_POPULATION = "Population";
 const SETTLEMENT_TAG_JOBS       = "Jobs";
 const SETTLEMENT_TAG_FOOD       = "Food";
 const SETTLEMENT_TAG_MATERIALS  = "Materials";
+
 class Settlement{
   public $data;
   
@@ -61,6 +62,7 @@ class Settlement{
     $stlmntJobs[$jobName]->$numPop;
     echo "$numPop workers assigned to the role of $jobName";
   }
+  
 }
 
 //SETTLEMENT UI FUNCTIONS
@@ -101,4 +103,3 @@ function SettlementJobBoardHTML($stlmnt){
 }
 
 
-?>

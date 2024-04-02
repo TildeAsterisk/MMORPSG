@@ -54,7 +54,7 @@ include_once("connection.php");
 
           <hr>
           <div id="navbar">
-            <a href="main.php">Control Centre</a>
+            <a href="main.php">Settlement</a>
             <!--a href="ship.php">Ship</a-->
             <a href="character_sheet.php">Character Sheet</a>
             <!--a href="profile.php">Profile</a-->
