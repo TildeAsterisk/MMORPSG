@@ -1,18 +1,20 @@
+html{
+}
 body {
 background-color: #C4C4C4;
 font-family: monospace;
 }
 
-/* This div has all the html in the body 
+/* This div has all the html in the body */
 #container {
-
 }
-*/
+
 
 /* Contains everything after Header */
 #content {
 /*float: left;*/
 /*padding:10px;*/
+height:100%;
 width:75%;
 margin:auto;
 }
@@ -121,3 +123,4 @@ width: 25%;
   border-collapse: collapse;
   padding:5px;
 }
+

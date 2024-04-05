@@ -11,35 +11,48 @@ if(!isset($_SESSION['uid'])){
 else{
   //Player is logged in, show main page
   ?>
-  <canvas id="myCanvas"></canvas>
-  <style>#myCanvas {margin:-8px;} #content {width:100%;}</style>
-  <script>
-    var canvas = document.getElementById("myCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight*0.8;
-    canvas.style.backgroundColor = "brown";
-    var ctx = canvas.getContext("2d");
+  <link href="gridStyle.css" type="text/css" rel="stylesheet" />
+  
+  <div class="wrapper">
+    <div class="grid">
+      <!-- Generated grid cells will be inserted here -->
+    </div>
+  </div>
 
-    ctx.fillStyle = "black";
-    ctx.fillRect(10, 10, 250, 250);
-  </script>
+  <script src="gridView.js"></script>
+
+
   <?php
+  // Get PlayerHome data in JSON
   /*
-  //Find settlement insql db
-  $getPlayerStlmntQuery = mysqli_query($mysql,"SELECT * FROM `settlement` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
-  $pSettlement = [ 'data' => (object)mysqli_fetch_assoc($getPlayerStlmntQuery)];
-  if($pSettlement ==null){
-    //Init Settlement Obj
-    $pSettlement = new Settlement();
-    $pSettlement->InitSettlement($mysql);
-  }
-  echo "<center><b>Total Population: {$pSettlement['data']->population}</b><br>";
-  echo SettlementJobBoardHTMl($pSettlement),"<br>";
-  //display income for food, resources
-  echo "Income:<br>+1 {$food_symbol}/day<br>+1 {$materials_symbol}/day<br>";
-  echo "<br>Buildings:";
-  echo "</center>";
+  $pHomeGridData=[];
+  $pHomeGridData['10,10'] = 'background-color: blue;';
+  // Use data to draw grid
+  $result = GenerateGrid(21, 21, '20px', $pHomeGridData);
+  echo $result;
   */
+  ?>
+
+  </div>
+  
+<script>
+  //INIT CELLS
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach(cell => {
+    // Add event listeners to each cell
+    cell.addEventListener('click', () => {
+        const cellId = cell.getAttribute('cell-id');
+        const x = event.target.getAttribute('data-x');
+        const y = event.target.getAttribute('data-y');
+        console.log(`Cell ${cellId} clicked at position (x: ${x}, y: ${y})`);
+        // You can perform any other actions here based on the cell ID
+
+        //DRAW CELLS
+    });
+  });
+</script>
+
+<?php
 
 }
 //include("update_stats.php");

@@ -356,3 +356,28 @@ function UseAvailableCharacterSkill($statsObj,$targetStatsObj){
     }
 }
 */
+
+function GenerateGrid($rows, $cols, $size, $gridData) {
+    // Initialize wrapper and grid divs string to store the grid
+    $grid = "<div class='wrapper'> <div class='grid'>";
+    // Counter for cell IDs
+    $cellId = 1;
+
+    // Loop through each row
+    for ($i = 0; $i < $rows; $i++) {
+        $grid .= '<div class="row">' . PHP_EOL;
+        // Loop through each cell in the row
+        for ($j = 0; $j < $cols; $j++) {
+            // Get grid data
+            $pCellData = $gridData["$i,$j"] ?? "";
+            // Add a unique data ID to each cell
+            $grid .= '  <div class="cell" style=" '.$pCellData.'width:'.$size.';height:'.$size.';" cell-id="' . $cellId . '" data-x="' . $i . '" data-y="' . $j . '"></div>' . PHP_EOL;
+            $cellId++; // Increment the cell ID
+        }
+        $grid .= '</div>' . PHP_EOL;
+    }
+    //Close wrapper and grid div
+    $grid .= '</div></div>' . PHP_EOL;
+
+    return $grid;
+}
