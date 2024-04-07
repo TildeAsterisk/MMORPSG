@@ -12,12 +12,14 @@ function generateGrid(rows, cols, size, gridData) {
       for (let j = 0; j < cols; j++) {
           // Get grid data
           let pCellData = '';
-          let inputForm = `<form action="cell_select.php" method="post" ><input class="submitNoStyle" style="width:100%;height:100%;padding:0;margin:0;" type="submit" name="cellButton" value="" /><input type="hidden" name="cell-data" value="${i},${j}" ></form>`;
+          let inputForm = `<form action="cell_select.php" method="post" ><input class="submitNoStyle" style="position:absolute;width:100%;height:100%;padding:0;margin:0;" type="submit" name="cellButton" value="" /><input type="hidden" name="cell-data" value="${i},${j}" ></form>`;
           if(typeof gridData === 'object'){
-            pCellData = gridData[`${i},${j}`] || "";
+            pCellData = gridData[`${i},${j}`] || {};
+            currentCellType = pCellData.cellType || "cell";
+            currentCellStyle = pCellData.style || "";
           }
           // Add a unique data ID to each cell
-          grid += `<div class="cell" style="${pCellData}width:${size};height:${size};">${inputForm}</div>\n`;
+          grid += `<div class="${currentCellType}" style="${currentCellStyle}width:${size};height:${size};"> ${inputForm}</div>\n`;
           cellId++; // Increment the cell ID
       }
       grid += '  </div>\n';
@@ -37,9 +39,12 @@ if (!pGridData){pGridData={};}
 pGridData=JSON.parse(pGridData['grid-data']);
 
 //SET HOME BASE CELL
-pGridData["10,10"]="background-color:blue;";
+pGridData["10,10"]={
+  style:"background-color:blue;",
+  cellType:"CT-Centre"
+};
 //Add pGridData
-console.log(pGridData);
+//console.log(pGridData);
 
 //GENERATE GRID HTML
 const generatedGrid = generateGrid(21, 21, '20px', pGridData);

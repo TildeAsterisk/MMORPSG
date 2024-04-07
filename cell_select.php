@@ -12,7 +12,7 @@ if(!isset($_SESSION['uid'])){
       'y'           => $cellDataArray[1]
     ];
 
-    echo "You have selected a cell at position X:$cellSelected[x],Y:$cellSelected[y].<br>";
+    echo "You have selected a cell at position X:$cellSelected[x],Y:$cellSelected[y].<br><br>";
 
     //get existing grid data
     $getPGridDataQuery= mysqli_query($mysql,"SELECT `grid-data` FROM `settlement` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
@@ -28,7 +28,10 @@ if(!isset($_SESSION['uid'])){
     //if doesn't already have data
     if(!$selectedCellData){
       //Add new cell data
-      $gridData["$cellSelected[x],$cellSelected[y]"] = "background-color: green;";
+      $gridData["$cellSelected[x],$cellSelected[y]"] = [
+        "style" => "background-color: green;",
+        "cellType" => "CT-Farm"
+      ];
       $gridDataEncoded = json_encode($gridData);
       //update grid cell data to SQL DB
       $updateGridDataQuery = "UPDATE `settlement` SET `grid-data`='$gridDataEncoded' WHERE `id`='".$_SESSION['uid']."'";
