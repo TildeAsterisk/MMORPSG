@@ -12,7 +12,7 @@ if(!isset($_SESSION['uid'])){
       'y'           => $cellDataArray[1]
     ];
 
-    echo "You have selected a cell at position X:$cellSelected[x],Y:$cellSelected[y].<br><br>";
+    echo "You have selected the cell...<br>";
 
     //get existing grid data
     $getPGridDataQuery= mysqli_query($mysql,"SELECT `grid-data` FROM `settlement` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
@@ -21,9 +21,7 @@ if(!isset($_SESSION['uid'])){
     $gridData = (array)json_decode($pGridData) ?? [];
 
     //Find selected cell data
-    $selectedCellData = $gridData["$cellSelected[x],$cellSelected[y]"] ?? null;
-    echo "This cell contains the data:<br>";
-    echo "$selectedCellData<br><br>";
+    $selectedCellData = $gridData["$cellSelected[x],$cellSelected[y]"] ?? [];
 
     //if doesn't already have data
     if(!$selectedCellData){
@@ -40,6 +38,12 @@ if(!isset($_SESSION['uid'])){
     }
     else{
       //Cell already filled
+      echo "<center><h2>".$selectedCellData->cellType."</h2></center>";
+      echo "Co-oridinates: X:$cellSelected[x],Y:$cellSelected[y]<br>";
+      echo "Style: ".$selectedCellData->style??"None.";
+      echo "<br><br>Full Selected Cell Data:<br>";
+      var_dump($selectedCellData);
+      echo "<br><br>";
       echo "Interact with this building. <br>";
     }
 
