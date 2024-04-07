@@ -12,8 +12,11 @@ if(!isset($_SESSION['uid'])){
       'y'           => $cellDataArray[1]
     ];
     
+    //get existing grid data
+    $getPGridDataQuery= mysqli_query($mysql,"SELECT `grid-data` FROM `settlement` WHERE `id`='".$_SESSION['uid']."'") or die(mysqli_error($mysql));
+    $pGridData = mysqli_fetch_assoc($getPGridDataQuery)["grid-data"];
     //generate gridData object with new cell data added
-    $gridData = [];
+    $gridData = (array)json_decode($pGridData) ?? [];
     $gridData["$cellSelected[x],$cellSelected[y]"] = "background-color: green;";
     $gridDataEncoded = json_encode($gridData);
 
