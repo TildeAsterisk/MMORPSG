@@ -14,11 +14,15 @@ else{
   <link href="gridStyle.css" type="text/css" rel="stylesheet" />
   
   <div class="wrapper">
-    
-    <div class="grid">
-      <!-- Generated grid cells will be inserted here -->
-    </div>
-    
+    <form action="cell_select.php" method="post" >
+      <div class="grid">
+        <!-- Generated grid cells will be inserted here -->
+      </div>
+      <br><br><hr>
+      <input type="submit" name="buildButton" value="Build"/>
+      <input type="submit" name="Inspect" value="View" />
+      <input type="submit" name="Destroy" value="Destroy" />
+    </form>
   </div>
 
   <!-- Embed the PHP data into a JavaScript variable -->

@@ -7,12 +7,12 @@ function generateGrid(rows, cols, size, gridData) {
 
   // Loop through each row
   for (let i = 0; i < rows; i++) {
-      grid += '  <div class="row">\n';
+      grid += '<div class="row">\n';
       // Loop through each cell in the row
       for (let j = 0; j < cols; j++) {
           // Get grid data
           let pCellData = '';
-          let inputForm = `<form action="cell_select.php" method="post" ><input class="submitNoStyle" style="position:absolute;width:100%;height:100%;padding:0;margin:0;" type="submit" name="cellButton" value="" /><input type="hidden" name="cell-data" value="${i},${j}" ></form>`;
+          let inputForm = `<input class="submitNoStyle"  style="left:0px;position:absolute;width:100%;height:100%;padding:0;margin:0;" type="radio" name="cell-data" value="${i},${j}" />`;
           if(typeof gridData === 'object'){
             pCellData = gridData[`${i},${j}`] || {};
             currentCellType = pCellData.cellType || "cell";

@@ -94,6 +94,8 @@ else{
       echo "Co-oridinates: X:$cellSelected[x],Y:$cellSelected[y]<br>";
       echo "<br>Full Selected Cell Data:<br>";
       var_dump($selectedCellData);
+      echo "<br>";
+      var_dump($_POST);
       echo "<br><br>";
       echo "<button disabled='true'>Upgrade</button><button disabled='true'>Destroy</button> <br>";
     }
