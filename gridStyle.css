@@ -59,7 +59,7 @@
   
   width:100%;
   height:100%;
-  background-color:yellowgreen;
+  background-color:green;
 }
 
 .CT-Centre{
@@ -104,4 +104,14 @@
   width:100%;
   height:100%;
   background-color:cyan;
+}
+
+.character {
+  position: absolute;
+  background-color: #000000; /* Character color */
+  transition: transform 3s linear; /*ease; Smooth transition */
+  z-index: -1;
+  width:100%;
+  height:100%;
+  border-radius: 50%;
 }

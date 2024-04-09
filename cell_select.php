@@ -26,6 +26,25 @@ else{
 
     //if doesn't already have data
     if(!$selectedCellData){
+
+      $emptyCellActionsHTML = <<<EOD
+      <form method="post"> 
+        <label for="cellTypes">Choose a plot type to build:</label>
+        <select name="cellTypes" id="cellTypes">
+          <option value="Wall">Wall</option>
+          <option value="Farm">Farm</option>
+          <option value="Barracks">Barracks</option>
+          <option value="Turret">Turret</option>
+        </select>
+        <input type="submit" name="buildButton" value="Build"/><br>
+        <input type="submit" name="refresh" value="Manage Structure"/> 
+        <!--input type="submit" name="backButton" value="Back To Base Grid"/-->
+        <input type="hidden" name="cell-data" value="{$_POST["cell-data"]}" /> 
+      </form> 
+      <a href='main.php'><button>Back to Home Grid</button></a>
+      EOD;
+      echo $emptyCellActionsHTML;
+
       //if Build selected get celltype to build
       if(isset($_POST['buildButton'])){
         //Player has clicked build button, get cellType
@@ -70,23 +89,6 @@ else{
         
       }
 
-      $emptyCellActionsHTML = <<<EOD
-      <form method="post"> 
-        <label for="cellTypes">Choose a plot type to build:</label>
-        <select name="cellTypes" id="cellTypes">
-          <option value="Wall">Wall</option>
-          <option value="Farm">Farm</option>
-          <option value="Barracks">Barracks</option>
-          <option value="Turret">Turret</option>
-        </select>
-        <input type="submit" name="buildButton" value="Build"/><br>
-        <input type="submit" name="refresh" value="Refresh"/> 
-        <!--input type="submit" name="backButton" value="Back To Base Grid"/-->
-        <input type="hidden" name="cell-data" value="{$_POST["cell-data"]}" /> 
-      </form> 
-      EOD;
-      echo $emptyCellActionsHTML;
-
     }
     else{
       //Cell already filled
@@ -116,6 +118,8 @@ else{
     //output("You have visited this page incorrectly.");
     //no cell data found
     //must have selected something...
+    echo "<a href='main.php'><button>Back to Home Grid</button></a><br>";
+
   }
 
 }

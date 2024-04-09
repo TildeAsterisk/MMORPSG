@@ -50,17 +50,52 @@ const generatedGrid = generateGrid(21, 21, '20px', pGridData);
 // Insert the generated grid into the HTML
 document.querySelector(".grid").innerHTML = generatedGrid;
 
-//INIT CELLS
-const cells = document.querySelectorAll('.cell');
-/*cells.forEach(cell => {
-  // Add event listeners to each cell
-  cell.addEventListener('click', () => {
-      const cellId = cell.getAttribute('cell-id');
-      const x = event.target.getAttribute('data-x');
-      const y = event.target.getAttribute('data-y');
-      console.log(`Cell ${cellId} clicked at position (x: ${x}, y: ${y})`);
-      // You can perform any other actions here based on the cell ID
 
-      //DRAW CELLS
-  });
-});*/
+//Character Movement
+const character = document.createElement('div');
+character.classList.add('character');
+document.querySelector('.cell').appendChild(character); // Place the character in the first cell
+
+// Function to move the character
+function moveCharacter(targetCell) {
+  const targetRect = targetCell.getBoundingClientRect();
+  const cellWidth = targetRect.width;
+  const cellHeight = targetRect.height;
+  const characterSize = 20; // Adjust based on your character's size
+
+  const centerX = targetRect.left + cellWidth / 2 - characterSize / 2;
+  const centerY = targetRect.top + cellHeight / 2 - characterSize / 2;
+
+  character.style.transform = `translate(${centerX}px, ${centerY}px)`; // Move the character
+}
+
+// Example usage:
+const cell1 = document.querySelector('.cell'); // Source cell
+const cell2 = document.querySelector('.row:nth-child(1) .cell'); // Target cell
+const cell3 = document.querySelector('.row:nth-child(11) .cell'); // Target cell
+const cell4 = document.querySelector('.row:nth-child(21) .cell'); // Target cell
+const targetCells = [cell1, cell2, cell3, cell4];
+
+// Function to sequentially move the character through the target cells
+function moveCharacterSequentially() {
+  let currentIndex = 0;
+
+  function moveToNextCell() {
+    if (currentIndex >= targetCells.length) {currentIndex=0;}
+    if (currentIndex < targetCells.length) {
+      const currentTargetCell = targetCells[currentIndex];
+      moveCharacter(currentTargetCell);
+
+      // Wait for the animation to finish (you can adjust the delay as needed)
+      setTimeout(moveToNextCell, 2000); // Wait for 2 seconds (adjust as desired)
+
+      currentIndex++;
+    }
+  }
+
+  // Start moving the character
+  moveToNextCell();
+}
+
+// Call the function to begin sequential movement
+moveCharacterSequentially();
