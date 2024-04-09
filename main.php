@@ -22,6 +22,14 @@ else{
       <input type="submit" name="buildButton" value="Build"/>
       <input type="submit" name="Inspect" value="View" />
       <input type="submit" name="Destroy" value="Destroy" />
+      <br>
+      <label for="cellTypes">Choose a plot type to build:</label>
+      <select name="cellTypes" id="cellTypes">
+        <option value="Wall">Wall</option>
+        <option value="Farm">Farm</option>
+        <option value="Barracks">Barracks</option>
+        <option value="Turret">Turret</option>
+      </select>
     </form>
   </div>
 
