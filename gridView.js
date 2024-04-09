@@ -40,7 +40,6 @@ pGridData=JSON.parse(pGridData['grid-data']);
 
 //SET HOME BASE CELL
 pGridData["10,10"]={
-  style:"background-color:blue;",
   cellType:"CT-Centre"
 };
 //Add pGridData
