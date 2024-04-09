@@ -105,7 +105,3 @@
   height:100%;
   background-color:cyan;
 }
-
-input:checked {
-  outline: 2px dotted white;
-}
