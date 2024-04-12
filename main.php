@@ -15,7 +15,7 @@ else{
   
   <div class="wrapper">
     
-    <div class="grid">
+    <div class="grid" id="grid1">
       <!-- Generated grid cells will be inserted here -->
     </div>
     

@@ -26,8 +26,17 @@
   /*width: 25px; height: 25px;*/
   outline: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+/*
 .grid > .row > .cell:hover {
-  background-color: red;
+  background-color: rgba(255, 255, 255, 0.5);
+  outline: 1px solid white;
+}
+*/
+
+.grid > .row > div:hover {
+  outline: 2px dashed white;
+  z-index: 10;
 }
 
 /* Rotating by X:40,Y:45 degrees gives isometric
@@ -109,9 +118,9 @@
 .character {
   position: absolute;
   background-color: #000000; /* Character color */
-  transition: transform 3s linear; /*ease; Smooth transition */
-  z-index: -1;
-  width:100%;
-  height:100%;
+  transition: transform 1.5s linear; /*ease; Smooth transition */
+  z-index: 3; /* character layer */
+  width:45%;
+  height:45%;
   border-radius: 50%;
 }
