@@ -117,8 +117,8 @@
 
 .character {
   position: absolute;
-  background-color: #000000; /* Character color */
-  transition: transform 1.5s linear; /*ease; Smooth transition */
+  background-color: #444444; /* Character color */
+  transition: transform 5s linear; /*ease; Smooth transition */
   z-index: 3; /* character layer */
   width:45%;
   height:45%;

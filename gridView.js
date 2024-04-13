@@ -83,7 +83,7 @@ class Character{
         charObj.moveCharacter([charObj.x,charObj.y],currentTargetCell);
 
         // Wait for the animation to finish (you can adjust the delay as needed)
-        setTimeout(moveToNextCell, 2000); // Wait for 2 seconds (adjust as desired)
+        setTimeout(moveToNextCell, 5000); // Wait for 2 seconds (adjust as desired)
 
         currentIndex++;
       }
@@ -131,11 +131,3 @@ char7 = new Character();
 char8 = new Character();
 char9 = new Character();
 char10 = new Character();
-char12 = new Character();
-char13 = new Character();
-char14 = new Character();
-char15 = new Character();
-char16 = new Character();
-char17 = new Character();
-char18 = new Character();
-char19 = new Character();
