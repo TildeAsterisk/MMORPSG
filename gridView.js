@@ -30,6 +30,77 @@ function generateGrid(rows, cols, size, gridData) {
   return grid;
 }
 
+class Character{
+  constructor(pos = [0,0]){
+    // Init/Construct Character Object
+    this.x = pos[0];
+    this.y=pos[1];
+    console.log("Character spawned at "+this.x,this.y);
+    // Generate random path
+    this.waypoints = this.GenerateRandomPath();
+    this.previousCell = [this.x,this.y];
+    this.elem = document.createElement('div');
+
+    //Character init char
+    this.elem.classList.add('character');
+    document.querySelector('.cell').appendChild(this.elem); // Place the character in the first cell
+
+
+    // Set on route
+    this.moveCharacterSequentially();
+
+  }
+  GenerateRandomPath() {
+    const cell1 = [Math.random()*21,Math.random()*21];
+    const cell2 = [Math.random()*21,Math.random()*21];
+    const cell3 = [Math.random()*21,Math.random()*21];
+    const cell4 = [Math.random()*21,Math.random()*21];
+    const cell5 = [Math.random()*21,Math.random()*21];
+    return [cell1, cell2, cell3, cell4,cell5];
+  }
+  moveCharacter(pos, targetPos) {
+    /*charElem= charElem.getBoundingClientRect();
+    const targetRect = targetCell.getBoundingClientRect();
+    const cellWidth = targetRect.width;
+    const cellHeight = targetRect.height;
+    const characterSize = 20; // Adjust based on your character's size*/
+    
+    const dx = (targetPos[0]-pos[0])*20;
+    const dy = (targetPos[1]-pos[1])*20;
+    this.elem.style.transform = `translate(${dx}px, ${dy}px)`; // Move the character
+    //console.log(charElem,targetRect);
+  }
+  // Function to sequentially move the character through the target cells
+  moveCharacterSequentially() {
+    let currentIndex = 0;
+    let charObj = this;
+    function moveToNextCell(targetCells) {
+      if (!targetCells){targetCells=[[Math.random()*21,Math.random()*21],[Math.random()*21,Math.random()*21], [Math.random()*21,Math.random()*21], [Math.random()*21,Math.random()*21]]}
+      if (currentIndex >= targetCells.length) {currentIndex=0;}
+      if (currentIndex < targetCells.length) {
+        //this.previousCell = targetCells[currentIndex];
+        const currentTargetCell = targetCells[currentIndex];
+        charObj.moveCharacter([charObj.x,charObj.y],currentTargetCell);
+
+        // Wait for the animation to finish (you can adjust the delay as needed)
+        setTimeout(moveToNextCell, 2000); // Wait for 2 seconds (adjust as desired)
+
+        currentIndex++;
+      }
+    }
+
+    // Start moving the character
+    moveToNextCell(this.waypoints);
+  }
+}
+
+function GetCellElemInGrid(x,y){
+  var rowList = document.getElementById('grid1').children;
+  //console.log(rowList[x].children[y]);
+  return cellInRow = rowList[x].children[y];
+}
+
+
 
 //GET GRID DATA FROM SQL
 if (!pGridData){pGridData={};}
@@ -42,8 +113,6 @@ pGridData=JSON.parse(pGridData['grid-data']);
 pGridData["10,10"]={
   cellType:"CT-Centre"
 };
-//Add pGridData
-//console.log(pGridData);
 
 //GENERATE GRID HTML
 const generatedGrid = generateGrid(21, 21, '20px', pGridData);
@@ -51,62 +120,22 @@ const generatedGrid = generateGrid(21, 21, '20px', pGridData);
 document.querySelector(".grid").innerHTML = generatedGrid;
 
 
-//Character Movement
-const character = document.createElement('div');
-character.classList.add('character');
-document.querySelector('.cell').appendChild(character); // Place the character in the first cell
-
-// Function to move the character
-function moveCharacter(pos, targetPos) {
-  /*charElem= charElem.getBoundingClientRect();
-  const targetRect = targetCell.getBoundingClientRect();
-  const cellWidth = targetRect.width;
-  const cellHeight = targetRect.height;
-  const characterSize = 20; // Adjust based on your character's size*/
-  const dx = (targetPos[0]-pos[0])*20;
-  const dy = (targetPos[1]-pos[1])*20;
-  console.log("Moved to "+targetPos);
-
-  character.style.transform = `translate(${dx}px, ${dy}px)`; // Move the character
-  //console.log(charElem,targetRect);
-}
-
-function GetCellElemInGrid(x,y){
-  var rowList = document.getElementById('grid1').children;
-  //console.log(rowList[x].children[y]);
-  return cellInRow = rowList[x].children[y];
-}
-
-
-// Example usage:
-const cell1 =[0,0];// Target cell
-const cell2 = [Math.random()*21,Math.random()*21];
-const cell3 = [Math.random()*21,Math.random()*21];
-const cell4 = [Math.random()*21,Math.random()*21];
-const targetCells = [cell1, cell2, cell3, cell4];
-
-// Function to sequentially move the character through the target cells
-function moveCharacterSequentially() {
-  let currentIndex = 0;
-
-  function moveToNextCell() {
-    if (currentIndex >= targetCells.length) {currentIndex=0;}
-    if (currentIndex < targetCells.length) {
-      const currentTargetCell = targetCells[currentIndex];
-      moveCharacter(cell1,currentTargetCell);
-
-      // Wait for the animation to finish (you can adjust the delay as needed)
-      setTimeout(moveToNextCell, 2000); // Wait for 2 seconds (adjust as desired)
-
-      currentIndex++;
-    }
-  }
-
-  // Start moving the character
-  moveToNextCell();
-}
-
-// Call the function to begin sequential movement
-moveCharacterSequentially();
-
-//moveCharacter(cell1,cell2);
+//Create characters
+char1 = new Character();
+char2 = new Character();
+char3 = new Character();
+char4 = new Character();
+char5 = new Character();
+char6 = new Character();
+char7 = new Character();
+char8 = new Character();
+char9 = new Character();
+char10 = new Character();
+char12 = new Character();
+char13 = new Character();
+char14 = new Character();
+char15 = new Character();
+char16 = new Character();
+char17 = new Character();
+char18 = new Character();
+char19 = new Character();
