@@ -19,7 +19,7 @@ function generateGrid(rows, cols, size, gridData) {
             currentCellStyle = pCellData.style || "";
           }
           // Add a unique data ID to each cell
-          grid += `<div class="${currentCellType}" style="${currentCellStyle}width:${size};height:${size};"> ${inputForm}</div>\n`;
+          grid += `<div class="${currentCellType}" style="${currentCellStyle}width:${size};height:${size};"> <div class="tilegraphic"></div> ${inputForm}</div>\n`;
           cellId++; // Increment the cell ID
       }
       grid += '  </div>\n';
@@ -115,7 +115,7 @@ pGridData["10,10"]={
 };
 
 //GENERATE GRID HTML
-const generatedGrid = generateGrid(21, 21, '20px', pGridData);
+const generatedGrid = generateGrid(21, 21, '30px', pGridData);
 // Insert the generated grid into the HTML
 document.querySelector(".grid").innerHTML = generatedGrid;
 
