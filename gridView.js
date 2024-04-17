@@ -45,7 +45,8 @@ class Character{
     this.elem.classList.add('character');
     document.querySelector('.cell').appendChild(this.elem); // Place the character in the first cell
 
-
+    setTimeout(() => {this.moveCharacter([this.x,this.y],[Math.random()*21,Math.random()*21]);},500);
+    
     // Set on route
     this.moveCharacterSequentially();
 
@@ -59,16 +60,10 @@ class Character{
     return [cell1, cell2, cell3, cell4,cell5];
   }
   moveCharacter(pos, targetPos) {
-    /*charElem= charElem.getBoundingClientRect();
-    const targetRect = targetCell.getBoundingClientRect();
-    const cellWidth = targetRect.width;
-    const cellHeight = targetRect.height;
-    const characterSize = 20; // Adjust based on your character's size*/
-    
-    const dx = (targetPos[0]-pos[0])*20;
-    const dy = (targetPos[1]-pos[1])*20;
+    //cellSize
+    const dx = (targetPos[0]-pos[0])*cellSize;
+    const dy = (targetPos[1]-pos[1])*cellSize;
     this.elem.style.transform = `translate(${dx}px, ${dy}px)`; // Move the character
-    //console.log(charElem,targetRect);
   }
   // Function to sequentially move the character through the target cells
   moveCharacterSequentially() {
@@ -110,12 +105,15 @@ if (!pGridData){pGridData={};}
 pGridData=JSON.parse(pGridData['grid-data']);
 
 //SET HOME BASE CELL
+/*
 pGridData["10,10"]={
   cellType:"CT-Centre"
 };
+*/
 
 //GENERATE GRID HTML
-const generatedGrid = generateGrid(21, 21, '20px', pGridData);
+const cellSize = 35;
+const generatedGrid = generateGrid(21, 21, cellSize+'px', pGridData);
 // Insert the generated grid into the HTML
 document.querySelector(".grid").innerHTML = generatedGrid;
 

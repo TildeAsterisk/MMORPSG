@@ -14,12 +14,14 @@ else{
   <link href="gridStyle.css" type="text/css" rel="stylesheet" />
   
   <div class="wrapper">
-    
     <div class="grid" id="grid1">
       <!-- Generated grid cells will be inserted here -->
     </div>
-    
   </div>
+
+  <!--div class='info-popup'>hello
+    <div class='info-content'>world</div>
+  </div-->
 
   <!-- Embed the PHP data into a JavaScript variable -->
   <script>
